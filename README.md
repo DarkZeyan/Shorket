@@ -1,6 +1,8 @@
 # Shortek Develop
 
-<p style="text-align:center"><img src="./extras/shortek_logo.png" width="300"/></p>
+<p style="text-align:center"><img src="./extras/shorket_logo.png" width="300"/></p>
+
+## Rama de desarrollo de Shortek
 
 Este proyecto ha sido creado con Angular 17.2
 
