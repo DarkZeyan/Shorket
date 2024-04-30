@@ -1,8 +1,6 @@
-# Shortek Develop
+# Shortek
 
 <p style="text-align:center"><img src="./extras/shorket_logo.png" width="300"/></p>
-
-## Rama de desarrollo de Shortek
 
 Este proyecto ha sido creado con Angular 17.2
 
@@ -14,11 +12,6 @@ Este proyecto ha sido creado con Angular 17.2
 
 Shortek se caracteriza por ser una aplicación desarrollada exclusivamente con Angular y MySQL que utilice el desarrollo integrado de una base de datos consistente y normalización.
 Así mismo, Shorket funciona como una aplicación que será el proyecto final de las asignaturas "Administración de Bases de Datos" y "Programación Front End".
-
-
-## Abrir servidor de desarrollo
-
-Ejecuta el comando  `ng serve` para abrir el servidor de desarrollo. Abre la URL `http://localhost:4200/`. La aplicacion se recargara de manera automatica si haces cambios a los archivos trackeados por Angular.
 
 ## Creacion de componentes de código
 
