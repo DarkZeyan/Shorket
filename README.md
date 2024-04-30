@@ -1,18 +1,18 @@
-# Shorket Develop
+# Shortek Develop
 
 <p style="text-align:center"><img src="./extras/shorket_logo.png" width="300"/></p>
 
-## Rama de desarrollo de Shorket
+## Rama de desarrollo de Shortek
 
 Este proyecto ha sido creado con Angular 17.2
 
 <p style="text-align:center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Angular_gradient.png" width="250"/></p>
 
-## ¿Qué es Shorket?
+## ¿Qué es Shortek?
 
-- Shorket es un prototipo de aplicación web desarrollada con Angular que simula la existencia de una tienda en línea perteneciente a la empresa del mismo nombre.
+- Shortek es un prototipo de aplicación web desarrollada con Angular que simula la existencia de una tienda en línea perteneciente a la empresa del mismo nombre.
 
-Shorket se caracteriza por ser una aplicación desarrollada exclusivamente con Angular y MySQL que utilice el desarrollo integrado de una base de datos consistente y normalización.
+Shortek se caracteriza por ser una aplicación desarrollada exclusivamente con Angular y MySQL que utilice el desarrollo integrado de una base de datos consistente y normalización.
 Así mismo, Shorket funciona como una aplicación que será el proyecto final de las asignaturas "Administración de Bases de Datos" y "Programación Front End".
 
 
