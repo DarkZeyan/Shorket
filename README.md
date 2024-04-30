@@ -1,27 +1,36 @@
-# Shorket
+# Shortek Develop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+<p style="text-align:center"><img src="./extras/shortek_logo.png" width="300"/></p>
 
-## Development server
+Este proyecto ha sido creado con Angular 17.2
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<p style="text-align:center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Angular_gradient.png" width="250"/></p>
 
-## Code scaffolding
+## ¿Qué es Shortek?
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Shortek es un prototipo de aplicación web desarrollada con Angular que simula la existencia de una tienda en línea perteneciente a la empresa del mismo nombre.
 
-## Build
+Shortek se caracteriza por ser una aplicación desarrollada exclusivamente con Angular y MySQL que utilice el desarrollo integrado de una base de datos consistente y normalización.
+Así mismo, Shorket funciona como una aplicación que será el proyecto final de las asignaturas "Administración de Bases de Datos" y "Programación Front End".
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Abrir servidor de desarrollo
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Ejecuta el comando  `ng serve` para abrir el servidor de desarrollo. Abre la URL `http://localhost:4200/`. La aplicacion se recargara de manera automatica si haces cambios a los archivos trackeados por Angular.
 
-## Running end-to-end tests
+## Creacion de componentes de código
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Ejecuta el comando `ng generate component component-name` para generar nuevos componentes.  Tambien puedes utilizar los comandos `ng generate directive|pipe|service|class|guard|interface|enum|module`
+para generar otro tipos de elementos utiles en Angular.
 
-## Further help
+## Build del proyecto
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Ejecuta  `ng build` para hacer el build del proyecto. Los artifacts del build del proyecto seran guardados en el directorio `dist/`.
+
+## Ejecutar pruebas unitarias
+
+Ejecuta  `ng test` para correr las pruebas unitarias haciendo uso de [Karma](https://karma-runner.github.io).
+
+## Corriendo las pruebas end-to-end
+
+Ejecuta `ng e2e` para ejecutar las pruebas end-to-end a traves de la plataforma de tu eleccion. Para usarlo se necesita añadir un paquete adicional que sea capaz de ejecutar las pruebas de end-to-end.
