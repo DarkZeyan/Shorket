@@ -13,6 +13,7 @@ import { AddressesPageComponent } from './shared/pages/addresses-page/addresses-
 import { OrderStatusPageComponent } from './shared/pages/order-status-page/order-status-page.component';
 import { CartPageComponent } from './shared/pages/cart-page/cart-page.component';
 import { OrderHistoryPageComponent } from './shared/pages/order-history-page/order-history-page.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { OrderHistoryPageComponent } from './shared/pages/order-history-page/ord
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    IonicModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent]
