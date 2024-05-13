@@ -1,10 +1,10 @@
 # Shortek
 
-<p style="text-align:center"><img src="./extras/shorket_logo.png" width="300"/></p>
+<p align="center"><img src="./extras/shorket_logo.png" width="300"/></p>
 
 Este proyecto ha sido creado con Angular 17.2
 
-<p style="text-align:center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Angular_gradient.png" width="250"/></p>
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Angular_gradient.png" width="250"/></p>
 
 ## ¿Qué es Shortek?
 
