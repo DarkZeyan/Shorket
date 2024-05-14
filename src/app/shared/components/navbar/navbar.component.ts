@@ -8,6 +8,9 @@ import { list as IonicList} from 'ionicons/icons';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+
+  public codigoPostal:string = '31000';
+
   constructor() {
 
     addIcons({
