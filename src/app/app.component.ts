@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
-import { SharedModule } from './shared/shared.module';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,4 +7,5 @@ import { SharedModule } from './shared/shared.module';
 })
 export class AppComponent {
   title = 'Shorket';
+  constructor(public router: Router) {}
 }
