@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,6 +16,15 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 
+const routes:Routes = [
+  { path: '', component: MainPageComponent },
+  { path: 'addresses', component: AddressesPageComponent },
+  { path: 'cart', component: CartPageComponent },
+  { path: 'catalog', component: CatalogPageComponent },
+  { path: 'order-history', component: OrderHistoryPageComponent },
+  { path: 'order-status', component: OrderStatusPageComponent },
+  { path: 'admin', component: AdminPageComponent }
+];
 
 @NgModule({
   declarations: [
@@ -30,7 +40,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   ],
   imports: [
     CommonModule,
-    IonicModule.forRoot({})
+    IonicModule.forRoot({}),
+    RouterModule.forChild(routes)
   ],
   exports:[
     MainPageComponent,
@@ -41,7 +52,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     OrderStatusPageComponent,
     AdminPageComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    RouterModule
   ]
 })
 export class SharedModule { }
