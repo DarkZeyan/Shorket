@@ -15,6 +15,10 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { MainPageModule } from './pages/main-page/main-page.module';
+import { BrowserModule } from '@angular/platform-browser';
+
+
 
 const routes:Routes = [
   { path: '', component: MainPageComponent },
@@ -40,6 +44,8 @@ const routes:Routes = [
   ],
   imports: [
     CommonModule,
+    BrowserModule,
+    MainPageModule,
     IonicModule.forRoot({}),
     RouterModule.forChild(routes)
   ],
