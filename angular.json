@@ -117,10 +117,6 @@
     }
   },
   "cli": {
-    "schematicCollections": [
-    ],
     "analytics": false
-  },
-  "schematics": {
   }
 }
