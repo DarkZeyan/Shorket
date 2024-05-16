@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-
-import { IonicModule } from '@ionic/angular';
 
 
 import { MainPageComponent } from './pages/main-page/main-page.component';
@@ -12,11 +11,12 @@ import { CatalogPageComponent } from './pages/catalog-page/catalog-page.componen
 import { OrderHistoryPageComponent } from './pages/order-history-page/order-history-page.component';
 import { OrderStatusPageComponent } from './pages/order-status-page/order-status-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { FooterComponent } from './components/footer/footer.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+
 import { MainPageModule } from './pages/main-page/main-page.module';
-import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -46,7 +46,6 @@ const routes:Routes = [
     CommonModule,
     BrowserModule,
     MainPageModule,
-    IonicModule.forRoot({}),
     RouterModule.forChild(routes)
   ],
   exports:[
