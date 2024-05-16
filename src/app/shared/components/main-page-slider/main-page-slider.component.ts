@@ -1,12 +1,14 @@
-import { Component,  } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Slide } from '../../interfaces/slide.interface';
-
+import * as bootstrap from 'bootstrap';
 @Component({
   selector: 'main-page-slider',
   templateUrl: './main-page-slider.component.html',
   styleUrls: ['./main-page-slider.component.scss'],
 })
-export class MainPageSliderComponent {
+export class MainPageSliderComponent implements AfterViewInit {
+  @ViewChild('carousel')
+  public carousel!: ElementRef<HTMLDivElement>;
 
   public slides:Slide[] = [
     { src: 'assets/slide1.jpg', width: 1000, height: 500},
@@ -19,6 +21,12 @@ export class MainPageSliderComponent {
     { src: 'assets/slide8.jpg', width: 1000, height: 500},
   ];
 
+  ngAfterViewInit() {
+    new bootstrap.Carousel(this.carousel.nativeElement, {
+      interval: 4500, // Change this to the desired interval in milliseconds
+      ride: 'carousel'
+    });
+  }
   constructor() { }
 
 }
