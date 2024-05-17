@@ -24,7 +24,8 @@
       "dom"
     ],
     "paths": {
-      "@shared/intefaces/*": ["./src/app/shared/interfaces/*"]
+      "@shared/intefaces/*": ["./src/app/shared/interfaces/*"],
+      "@products/interfaces/*": ["./src/app/products/interfaces/*"],
     }
   },
   "angularCompilerOptions": {

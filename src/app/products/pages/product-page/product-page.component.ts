@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductPageComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
+  ngOnInit() {
+    this.route.params.subscribe(params => {
 
-  ngOnInit() {}
+    });
+  }
 
 }
