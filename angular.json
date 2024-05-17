@@ -32,15 +32,11 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/_redirects",
               {
                 "input":"src/assets",
                 "glob": "**/*.svg",
                 "output": "./svg"
-              },
-              {
-                "glob": "_redirects",
-                "input": "src",
-                "output": "/"
               }
             ],
             "styles": [
