@@ -25,7 +25,8 @@ const routes:Routes = [
   { path: '', component: MainPageComponent },
   { path: 'addresses', component: AddressesPageComponent },
   { path: 'cart', component: CartPageComponent },
-  { path: 'catalog', component: CatalogPageComponent },
+  { path: 'categories', component: CategoryPageComponent },
+  { path: 'category/:name', component: CatalogPageComponent },
   { path: 'order-history', component: OrderHistoryPageComponent },
   { path: 'order-status', component: OrderStatusPageComponent },
   { path: 'admin', component: AdminPageComponent }
