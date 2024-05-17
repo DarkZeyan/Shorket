@@ -6,7 +6,7 @@ import { SharedModule } from './shared/shared.module';
 const routes: Routes = [];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), SharedModule],
+  imports: [RouterModule.forRoot(routes, {useHash:true}), SharedModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

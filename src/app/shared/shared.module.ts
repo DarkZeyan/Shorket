@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AddressesPageComponent } from './pages/addresses-page/addresses-page.component';
@@ -62,6 +62,7 @@ const routes:Routes = [
     FooterComponent,
     NavbarComponent,
     RouterModule
-  ]
+  ],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
 })
 export class SharedModule { }
