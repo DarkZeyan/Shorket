@@ -1,28 +1,19 @@
 <div class="mt-5 mb-3">
   <div class="d-flex justify-content-center align-items-center">
-    <div class="row">
-      <div class="col-md-6">
+    <div *ngIf="suggestedProducts.length > 0" class="row">
+      <div *ngFor="let product of suggestedProducts" class="col-md-6">
         <div class="card mb-2 text-center bg-light">
-          <img class="card-img-top art-rec-img" src="assets/artrec-1.jpg" alt="">
+          <a [routerLink]="['/category',product.category_id,'products']" [queryParams]="{product_id: product.id}">
+          <img class="card-img-top art-rec-img" [src]="product.image" alt="">
           <div class="card-body">
             <h5 class="card-text">
-              Artículo recomendado
+              {{product.name}}
             </h5>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card mb-2 text-center bg-light">
-          <img class="card-img-top art-rec-img" src="assets/artrec-2.jpg" alt="">
-          <div class="card-body">
-            <h5 class="card-text">
-              Artículo recomendado
-            </h5>
-          </div>
+          </a>
         </div>
       </div>
     </div>
-
   </div>
   <div class="d-flex justify-content-center text-center mt-3">
     <h3>

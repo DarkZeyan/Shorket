@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Router } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { MainPageComponent } from './pages/main-page/main-page.component';

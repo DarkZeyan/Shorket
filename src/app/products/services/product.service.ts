@@ -97,4 +97,40 @@ export class ProductService {
   getProductsByCategory(category_id: number): Product[] {
     return this.products.filter(product => product.category_id === category_id);
   }
+
+  getRandomSuggestedProducts(): Product[] {
+    // Get two random products
+    if(this.products.length>2){
+      const suggestedProducts: Product[] = [];
+      let randomIndex1 = Math.floor(Math.random() * this.products.length);
+      let randomIndex2;
+      do {
+        randomIndex2 = Math.floor(Math.random() * this.products.length);
+      } while(randomIndex1 === randomIndex2);
+      suggestedProducts.push(this.products[randomIndex1]);
+      suggestedProducts.push(this.products[randomIndex2]);
+      return suggestedProducts;
+    }
+    return [];
+  }
+
+  getSuggestedProductsByCategory(product_id: number, category_id: number): Product[] {
+
+    // Get two random products from the same category and is not current product
+
+    const suggestedProducts: Product[] = [];
+    let productsByCategory = this.getProductsByCategory(category_id).filter(product => product.id !== product_id);
+    if(productsByCategory.length > 0){
+      let randomIndex1 = Math.floor(Math.random() * productsByCategory.length);
+      let randomIndex2;
+      do {
+        randomIndex2 = Math.floor(Math.random() * productsByCategory.length);
+      } while(randomIndex1 === randomIndex2);
+      suggestedProducts.push(productsByCategory[randomIndex1]);
+      suggestedProducts.push(productsByCategory[randomIndex2]);
+      return suggestedProducts;
+    }
+    return [];
+  }
+
 }

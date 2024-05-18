@@ -7,6 +7,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { ProductReviewComponent } from './components/product-review/product-review.component';
+import { SuggestedProductsComponent } from './components/suggested-products/suggested-products.component';
 
 const routes = [
   { path: 'category/:category_id/products', component: ProductPageComponent }
@@ -14,7 +15,7 @@ const routes = [
 
 
 @NgModule({
-  declarations: [ProductPageComponent, ProductReviewComponent],
+  declarations: [ProductPageComponent, ProductReviewComponent, SuggestedProductsComponent],
   imports: [
     CommonModule,
     BrowserModule,

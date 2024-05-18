@@ -44,7 +44,7 @@
               <p class="card-title text-white">Fecha estimada de entrega</p>
             </div>
             <div class="mb-3 card bg-light">
-              <p class="card-text ">Lunes 20 de septiembre</p>
+              <p class="card-text ">{{'2024-07-01' | date: "dd MMMM y":"":"es-MX" }}</p>
             </div>
           </div>
         </div>
@@ -52,8 +52,10 @@
     </div>
   </div>
 </div>
-<div class="row m-3">
-  <div class="col-md-5">
+<div class="row m-3 justify-content-center">
+  <div class="col-md-4">
     <product-reviews [reviews]="reviews"></product-reviews>
   </div>
+  <div class="col-md-4">
+    <suggested-products [suggestedProducts]="suggestedProducts"></suggested-products>
 </div>

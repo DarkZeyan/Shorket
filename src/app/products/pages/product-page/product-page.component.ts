@@ -14,6 +14,7 @@ export class ProductPageComponent  implements OnInit {
   product!: Product;
 
   reviews: Review[] = [];
+  suggestedProducts: Product[] = [];
 
   constructor(private route: ActivatedRoute, private ProductService: ProductService, private router: Router) {
 
@@ -23,10 +24,12 @@ export class ProductPageComponent  implements OnInit {
 
 
   ngOnInit() {
-
-      const product_id = +this.route.snapshot.queryParams['product_id'];
+    this.route.queryParams.subscribe(params => {
+      const product_id = +params['product_id'];
       this.product = this.getProductById(product_id);
       this.reviews = this.getReviewsByProductId(this.product.id);
+      this.suggestedProducts = this.getSuggestedProducts(this.product.id, this.product.category_id);
+    });
 
   }
   getProductById(product_id: number){
@@ -34,6 +37,10 @@ export class ProductPageComponent  implements OnInit {
   }
   getReviewsByProductId(product_id: number): Review[] {
     return this.ProductService.getReviewsByProductId(product_id);
+  }
+
+  getSuggestedProducts(product_id: number, category_id: number): Product[] {
+    return this.ProductService.getSuggestedProductsByCategory(product_id ,category_id);
   }
 
 }
