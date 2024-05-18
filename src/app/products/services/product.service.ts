@@ -1,10 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Product } from '@products/interfaces/product.interface';
+import { Review } from '@products/interfaces/product-review.interface';
 @Injectable({providedIn: 'root'})
 export class ProductService {
+
+  private Reviews: Review[] = [
+    {id: 1, product_id: 1, user_id: 1, rating: 5, title: 'Great product', commentary: 'I love this product!'},
+    {id: 2, product_id: 1, user_id: 2, rating: 4, title: 'Good product', commentary: 'I like this product!'},
+    {id: 3, product_id: 1, user_id: 3, rating: 3, title: 'Ok product', commentary: 'This product is ok!'},
+    {id: 4, product_id: 2, user_id: 1, rating: 5, title: 'Great product', commentary: 'I love this product!'},
+    {id: 5, product_id: 2, user_id: 2, rating: 4, title: 'Good product', commentary: 'I like this product!'},
+    {id: 6, product_id: 2, user_id: 3, rating: 3, title: 'Ok product', commentary: 'This product is ok!'},
+  ];
+
+
   private product!: Product;
 
-  public products:Product[] = [
+  getReviewsByProductId(product_id: number): Review[] {
+    return this.Reviews.filter(review => review.product_id === product_id);
+  }
+
+  private products:Product[] = [
     {
       id: 1,
       category_id: 1,
@@ -55,14 +71,20 @@ export class ProductService {
       stock: 10,
       image: 'assets/product-imgs/image-not-available.png'
     },
+    {
+      id:6,
+      category_id: 2,
+      name: 'iPhone 12',
+      brand: 'Apple',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, ex nec luctus ultrices, nunc risus ultricies nunc, nec malesuada mi nisl at justo.',
+      price: 1000,
+      stock: 10,
+      image: 'assets/product-imgs/image-not-available.png'
+    }
 
   ];
 
   constructor() { }
-
-  setProduct(product: Product) {
-    this.product = product;
-  }
 
   getProduct(): Product {
     return this.product;

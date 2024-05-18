@@ -1,0 +1,24 @@
+.product-details{
+  padding: 20px;
+}
+.product-img{
+  width:500px;
+  height:500px
+}
+.product-actions{
+  margin-left:50%;
+  margin-top: -15rem
+}
+.description-container{
+  max-width: 350px;
+}
+.description-container p{
+  text-align: justify;
+}
+
+.promo-card{
+  --bs-card-spacer-y: 0rem !important;
+}
+.promo-card .card-body .card-title{
+ font-weight: 600;
+}
