@@ -22,7 +22,11 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@shared/intefaces/*": ["./src/app/shared/interfaces/*"],
+      "@products/interfaces/*": ["./src/app/products/interfaces/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

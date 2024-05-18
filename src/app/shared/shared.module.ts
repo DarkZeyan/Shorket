@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-
-import { IonicModule } from '@ionic/angular';
-
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AddressesPageComponent } from './pages/addresses-page/addresses-page.component';
@@ -12,11 +11,13 @@ import { CatalogPageComponent } from './pages/catalog-page/catalog-page.componen
 import { OrderHistoryPageComponent } from './pages/order-history-page/order-history-page.component';
 import { OrderStatusPageComponent } from './pages/order-status-page/order-status-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { FooterComponent } from './components/footer/footer.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+
 import { MainPageModule } from './pages/main-page/main-page.module';
-import { BrowserModule } from '@angular/platform-browser';
+import { CategoryPageComponent } from './pages/category-page/category-page.component';
 
 
 
@@ -24,7 +25,8 @@ const routes:Routes = [
   { path: '', component: MainPageComponent },
   { path: 'addresses', component: AddressesPageComponent },
   { path: 'cart', component: CartPageComponent },
-  { path: 'catalog', component: CatalogPageComponent },
+  { path: 'categories', component: CategoryPageComponent },
+  { path: 'category/:name', component: CatalogPageComponent },
   { path: 'order-history', component: OrderHistoryPageComponent },
   { path: 'order-status', component: OrderStatusPageComponent },
   { path: 'admin', component: AdminPageComponent }
@@ -40,13 +42,13 @@ const routes:Routes = [
     OrderStatusPageComponent,
     AdminPageComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    CategoryPageComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     MainPageModule,
-    IonicModule.forRoot({}),
     RouterModule.forChild(routes)
   ],
   exports:[
@@ -60,6 +62,7 @@ const routes:Routes = [
     FooterComponent,
     NavbarComponent,
     RouterModule
-  ]
+  ],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
 })
 export class SharedModule { }

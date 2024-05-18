@@ -1,3 +1,11 @@
 .bg-info{
   background-color: #b6ccde !important;
 }
+.bg-body-tertiary{
+  background-color: #A9C5D2 !important;
+  color: white;
+}
+.bg-body-tertiary .nav-link{
+  color: white;
+  font-weight: 600;
+}

@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="text-center bg-primary text-white py-2 reviews-header">
+        <h4>Reseñas</h4>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="reviews.length === 0" class="row justify-content-center-mt-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <h6 class="card-title font-weight-bold text-center">
+              No existen reseñas para este producto
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let review of reviews" class="row justify-content-center mt-3">
+    <div class="col-10 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <img [src]="getStarsImagePath(review.rating)" [alt]="review.rating+' stars'" class="mr-2 stars">
+            <h5 class="card-title font-weight-bold">{{review.title}}</h5>
+          </div>
+          <p class="card-text mt-2">
+            {{review.commentary}}
+          </p>
+          <p class="text-right font-weight-bold">{{getUserNameById(review.user_id)}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
