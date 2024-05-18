@@ -7,7 +7,7 @@
 
 <div class="row m-5">
   <div *ngFor="let product of products" class="col-md-4 col-sm-7">
-    <a [routerLink]="['/category',product.category_id,'product',product.id]" class="product-link">
+    <a [routerLink]="['/category',product.category_id,'products']" [queryParams]="{product_id: product.id}" class="product-link">
       <div class="card mb-4 text-center">
         <img [src]="product.image" alt="" class="card-img-top cat-img mx-auto d-block mt-3 product-img">
         <div class="card-body">

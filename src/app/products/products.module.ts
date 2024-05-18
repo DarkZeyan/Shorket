@@ -8,7 +8,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 
 const routes = [
-  { path: 'category/:category_id/product/:id', component: ProductPageComponent }
+  { path: 'category/:category_id/products', component: ProductPageComponent }
 ];
 
 

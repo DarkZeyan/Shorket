@@ -1,3 +1,24 @@
 <p>
   product-page works!
 </p>
+<div class="container mt-5">
+  <div class="row">
+    <!-- Seccion para la imagen del producto -->
+    <div class="col-md-6 text-center">
+      <img [src]="product.image" [alt]="product.description" class="product-img">
+    </div>
+    <!-- Seccion de detalles del producto -->
+    <div class="col-md-6 product-details">
+      <h2>
+        {{product.name | uppercase}}
+
+      </h2>
+      <h4 class="product-price">
+        {{product.price | currency}}
+      </h4>
+      <h6 class="product-shipping-cost">
+        Costo de envio: {{ 270 | currency}}
+      </h6>
+    </div>
+  </div>
+</div>
