@@ -1,0 +1,9 @@
+.reviews-header{
+  border-top-left-radius: 0.45rem;
+  border-top-right-radius: 0.45rem;
+}
+
+.stars{
+  width: 70px;
+  margin-right:1rem
+}
