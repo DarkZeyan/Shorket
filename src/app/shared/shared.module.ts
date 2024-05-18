@@ -18,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { MainPageModule } from './pages/main-page/main-page.module';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
+import { TableComponentComponent } from './pages/cart-page/components/table-component/table-component.component';
 
 
 
@@ -43,7 +44,8 @@ const routes:Routes = [
     AdminPageComponent,
     FooterComponent,
     NavbarComponent,
-    CategoryPageComponent
+    CategoryPageComponent,
+    TableComponentComponent
   ],
   imports: [
     CommonModule,
