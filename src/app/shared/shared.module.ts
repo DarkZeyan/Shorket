@@ -32,7 +32,7 @@ const routes:Routes = [
   { path: 'categories', component: CategoryPageComponent },
   { path: 'category/:name', component: CatalogPageComponent },
   { path: 'order-history', component: OrderHistoryPageComponent },
-  { path: 'order-status', component: OrderStatusPageComponent },
+  { path: 'order/:id', component: OrderStatusPageComponent },
   { path: 'admin', component: AdminPageComponent }
 ];
 

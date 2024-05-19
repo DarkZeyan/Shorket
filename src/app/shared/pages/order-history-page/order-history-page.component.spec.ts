@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderHistoryPageComponent } from './order-history-page.component';
+import OrderHistoryPageComponent from './order-history-page.component';
 
 describe('OrderHistoryPageComponent', () => {
   let component: OrderHistoryPageComponent;
@@ -11,7 +11,7 @@ describe('OrderHistoryPageComponent', () => {
       declarations: [OrderHistoryPageComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(OrderHistoryPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
