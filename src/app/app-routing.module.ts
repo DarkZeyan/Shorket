@@ -7,7 +7,7 @@ import { ProductsModule } from './products/products.module';
 const routes: Routes = [];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash:true}), SharedModule, ProductsModule],
+  imports: [RouterModule.forRoot(routes), SharedModule, ProductsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

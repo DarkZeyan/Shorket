@@ -1,0 +1,36 @@
+<div class="container mt-5 bg-info bg-opacity-10">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="text-center bg-info text-white py-2 reviews-header" style="margin-left:-0.75rem; margin-right: -0.75rem">
+        <h4>Productos recomendados</h4>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="suggestedProducts.length === 0" class="row justify-content-center-mt-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <h6 class="card-title font-weight-bold text-center">
+              No existen recomendaciones para esta categoria
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let product of suggestedProducts" class="row justify-content-center mt-3  m-1">
+    <div class="col-6 mb-3">
+      <div class="card  bg-opacity-25 text-center align-items-center">
+        <a [routerLink]="['/category',product.category_id,'products']" [queryParams]="{product_id: product.id}" class="product-link">
+        <img [src]="product.image" [alt]="product.name" class="product-img card-img-top mt-3 ">
+        <div class="card-body">
+          <div class="text-center align-items-center">
+            <h5 class="card-title font-weight-bold">{{product.name}}</h5>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

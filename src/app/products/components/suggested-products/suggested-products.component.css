@@ -1,0 +1,15 @@
+.suggested-header{
+  border-top-left-radius: 0.45rem;
+  border-top-right-radius: 0.45rem;
+}
+
+.product-img{
+  width:200px;
+  height: 200px;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}

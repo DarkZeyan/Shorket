@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { Routes, RouterModule, Router } from '@angular/router';
 
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AddressesPageComponent } from './pages/addresses-page/addresses-page.component';
@@ -18,6 +17,7 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { MainPageModule } from './pages/main-page/main-page.module';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
+import { TableComponentComponent } from './pages/cart-page/components/table-component/table-component.component';
 
 
 
@@ -43,7 +43,8 @@ const routes:Routes = [
     AdminPageComponent,
     FooterComponent,
     NavbarComponent,
-    CategoryPageComponent
+    CategoryPageComponent,
+    TableComponentComponent
   ],
   imports: [
     CommonModule,
@@ -63,6 +64,6 @@ const routes:Routes = [
     NavbarComponent,
     RouterModule
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
+  providers: []
 })
 export class SharedModule { }

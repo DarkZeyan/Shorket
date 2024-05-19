@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { ProductReviewComponent } from './components/product-review/product-review.component';
+import { SuggestedProductsComponent } from './components/suggested-products/suggested-products.component';
 
 const routes = [
   { path: 'category/:category_id/products', component: ProductPageComponent }
@@ -14,7 +14,7 @@ const routes = [
 
 
 @NgModule({
-  declarations: [ProductPageComponent, ProductReviewComponent],
+  declarations: [ProductPageComponent, ProductReviewComponent, SuggestedProductsComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -24,7 +24,7 @@ const routes = [
     ProductPageComponent
   ],
   providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+
   ]
 })
 export class ProductsModule { }
