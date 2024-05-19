@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule, Router } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AddressesPageComponent } from './pages/addresses-page/addresses-page.component';
@@ -18,6 +20,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MainPageModule } from './pages/main-page/main-page.module';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { TableComponentComponent } from './pages/cart-page/components/table-component/table-component.component';
+import { PaymentMethodComponent } from './pages/cart-page/components/payment-method/payment-method.component';
 
 
 
@@ -44,11 +47,13 @@ const routes:Routes = [
     FooterComponent,
     NavbarComponent,
     CategoryPageComponent,
-    TableComponentComponent
+    TableComponentComponent,
+    PaymentMethodComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    ReactiveFormsModule,
     MainPageModule,
     RouterModule.forChild(routes)
   ],
