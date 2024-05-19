@@ -21,6 +21,7 @@ import { MainPageModule } from './pages/main-page/main-page.module';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { TableComponentComponent } from './pages/cart-page/components/table-component/table-component.component';
 import { PaymentMethodComponent } from './pages/cart-page/components/payment-method/payment-method.component';
+import { WishListComponent } from './pages/wish-list/wish-list.component';
 
 
 
@@ -48,7 +49,8 @@ const routes:Routes = [
     NavbarComponent,
     CategoryPageComponent,
     TableComponentComponent,
-    PaymentMethodComponent
+    PaymentMethodComponent,
+    WishListComponent
   ],
   imports: [
     CommonModule,

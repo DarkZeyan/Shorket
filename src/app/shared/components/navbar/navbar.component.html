@@ -16,18 +16,23 @@
       <div class="col">
         <form role="search" class="d-flex justify-content-center" style="width:30vw">
           <div class="input-group">
-
             <input type="search" class="form-control" placeholder="Busca los mejores productos..." aria-label="Search">
             <span class="input-group-text"><i class="bi bi-search"></i></span>
           </div>
         </form>
       </div>
       <div class="col" style="margin-left:5%">
-        <button type="button" class="btn btn-light" style="width:200px">
-
-          <i class="bi bi-list"></i>
-          Ver opciones del sitio
-        </button>
+        <div class="dropdown">
+          <button type="button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" class="btn btn-light" style="width:200px">
+            <i class="bi bi-list"></i>
+            Ver opciones del sitio
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="['/order-history']" routerLinkActive="router-link-active" >Historial de compras</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/addresses']" routerLinkActive="router-link-active" >Mis direcciones</a></li>
+            <li><a class="dropdown-item" href="#">Lista de deseados</a></li>
+          </ul>
+        </div>
       </div>
       <div class="col d-inline-block" style="width: 300px;">
         <button type="button" class="btn btn-light" routerLink="/cart">
