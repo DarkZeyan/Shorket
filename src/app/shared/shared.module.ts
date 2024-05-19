@@ -65,6 +65,6 @@ const routes:Routes = [
     NavbarComponent,
     RouterModule
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
+  providers: []
 })
 export class SharedModule { }

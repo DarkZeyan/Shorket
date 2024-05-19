@@ -25,7 +25,7 @@ const routes = [
     ProductPageComponent
   ],
   providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+
   ]
 })
 export class ProductsModule { }
