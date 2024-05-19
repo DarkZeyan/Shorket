@@ -1,1 +1,72 @@
-<p>addresses-page works!</p>
+<div class="justify-content-center m-5" style="min-height: 55vh;">
+  <div class="row" *ngIf="addresses.length>0">
+    <div *ngFor="let address of addresses; let index = index" class="col-sm-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Dirección No.{{index+1}}</h5>
+          <p class="card-text">Direccion: {{address.address_line1}}</p>
+          <p *ngIf="address.address_line2" class="card-text">Direccion Linea 2: {{address.address_line2}}</p>
+          <p class="card-text">{{address.city}}, {{address.state}}. {{ address.country }}</p>
+          <p class="card-text">Codigo postal: {{address.postal_code}}</p>
+          <p class="card-text">Telefono: {{address.phone_number}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="addresses.length===0" class="container-fluid">
+    <div class="alert alert-info" role="alert">
+      No tienes direcciones registradas
+    </div>
+  </div>
+  <div class="text-end">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">Agregar nueva direccion</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addAddressModalLabel">Agregar nueva direccion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label class="form-label" for="address_line1">Direccion Linea 1</label>
+            <input class="form-control" type="text" id="address_line1" formControlName="address_line1">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="address_line2">Direccion Linea 2</label>
+            <input class="form-control" type="text" id="address_line1" formControlName="address_line2">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="city">Ciudad</label>
+            <input class="form-control" type="text" id="city" formControlName="city">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="state">Estado</label>
+            <input class="form-control" type="text" id="state" formControlName="state">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="country">Pais</label>
+            <input class="form-control" type="text" id="country" formControlName="country">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="postal_code">Codigo Postal</label>
+            <input class="form-control" type="text" id="postal_code" formControlName="postal_code">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone_number">Número de teléfono</label>
+            <input class="form-control" type="text" id="phone_number" formControlName="phone_number">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button (click)="onSubmit()" type="button" class="btn btn-primary">Añadir direccion</button>
+      </div>
+    </div>
+  </div>
+</div>
