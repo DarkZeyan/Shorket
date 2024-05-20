@@ -41,6 +41,34 @@ export class OrdersService {
       product_id: 2,
       quantity: 1,
       subtotal: 1000
+    },
+    {
+      id: 3,
+      order_id: 2,
+      product_id: 5,
+      quantity: 3,
+      subtotal: 3000
+    },
+    {
+      id: 4,
+      order_id: 2,
+      product_id: 4,
+      quantity: 1,
+      subtotal: 1000
+    },
+    {
+      id: 5,
+      order_id: 3,
+      product_id: 6,
+      quantity: 1,
+      subtotal: 1000
+    },
+    {
+      id: 6,
+      order_id: 3,
+      product_id: 3,
+      quantity: 1,
+      subtotal: 1000
     }
   ];
 

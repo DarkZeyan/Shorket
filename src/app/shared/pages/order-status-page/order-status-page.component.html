@@ -84,9 +84,9 @@
             {{ getProductByOrderDetail(detail).name}}</a>
           </td>
           <td>{{ detail.quantity }}</td>
-          <td>{{ getProductByOrderDetail(detail).price }}</td>
-          <td *ngIf="detail.subtotal">{{detail.subtotal}}</td>
-          <td *ngIf="!detail.subtotal || detail.subtotal === 0" >{{ getProductByOrderDetail(detail).price * detail.quantity }}</td>
+          <td>{{ getProductByOrderDetail(detail).price | currency}}</td>
+          <td *ngIf="detail.subtotal">{{detail.subtotal | currency }}</td>
+          <td *ngIf="!detail.subtotal || detail.subtotal === 0" >{{ getProductByOrderDetail(detail).price * detail.quantity | currency }}</td>
         </tr>
       </tbody>
     </table>
