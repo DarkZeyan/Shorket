@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Modal } from 'bootstrap';
 import { Address } from '@shared/intefaces/address.interface';
 
 @Component({
@@ -12,6 +13,8 @@ export class AddressesPageComponent {
   addresses: Address[] = [
 
   ];
+
+  modal!: Modal;
 
   addressForm: FormGroup;
 
@@ -29,10 +32,16 @@ export class AddressesPageComponent {
       phone_number: ['', Validators.required]
     });
   }
+
+  ngAfterViewInit() {
+    this.modal = new Modal(document.getElementById('addAddressModal')!);
+  }
+
   onSubmit() {
     if (this.addressForm.valid) {
       this.addresses.push(this.addressForm.value);
       this.addressForm.reset();
+      this.modal.hide()
     }
   }
 }
