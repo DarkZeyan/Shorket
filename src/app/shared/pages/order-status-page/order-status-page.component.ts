@@ -13,7 +13,6 @@ export class OrderStatusPageComponent implements OnInit {
 
   order!: Order;
   orderDetails: OrderDetail[] = [];
-  products: Product[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private orderService: OrdersService, private productService: ProductService) { }
 
@@ -22,9 +21,8 @@ export class OrderStatusPageComponent implements OnInit {
     this.route.params.subscribe(params => {
 
       const orderId = +params['id'];
-      this.getOrderDetailsByOrderId(orderId);
       this.getOrderByOrderId(orderId);
-
+      this.getOrderDetailsByOrderId(orderId);
 
     });
   }
@@ -42,10 +40,6 @@ export class OrderStatusPageComponent implements OnInit {
     }
   }
 
-  getOrderDetails(): void {
-    this.orderDetails = this.orderService.getDetailsByOrderId(this.order.id);
-  }
-
   getOrderDetailsByOrderId(orderId: number): void {
     this.orderDetails = this.orderService.getDetailsByOrderId(orderId);
   }
@@ -61,5 +55,11 @@ export class OrderStatusPageComponent implements OnInit {
   getProductByOrderDetail(orderDetail: OrderDetail): Product {
     return this.getProductById(orderDetail.product_id);
   }
+
+  getMostExpensiveProductByOrderDetail(order_id: number): Product {
+    const detail = this.orderService.getDetailWithMostExpensiveProduct(order_id);
+    return this.getProductById(detail.product_id);
+  }
+
 
 }

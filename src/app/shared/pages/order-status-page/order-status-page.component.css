@@ -10,3 +10,8 @@
 .delivery-date-label{
   max-width: fit-content;
 }
+
+a{
+  text-decoration: none;
+  font-weight: bold;
+}

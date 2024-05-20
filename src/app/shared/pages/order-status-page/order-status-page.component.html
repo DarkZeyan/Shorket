@@ -13,9 +13,9 @@
       <div class="col-md-3">
         <div class="card bg-transparent">
           <div class="card-body">
-            <img src="assets/product-imgs/image-not-available.png" alt=""
+            <img [src]="getMostExpensiveProductByOrderDetail(order.id).image" alt=""
               class="primary-product card-img-top mx-auto d-block">
-            <h4 class="card-title mt-3 text-center"> <strong>Producto #1</strong> </h4>
+            <h4 class="card-title mt-3 text-center"> <strong>{{getMostExpensiveProductByOrderDetail(order.id).name | uppercase}}</strong> </h4>
           </div>
         </div>
       </div>
@@ -66,5 +66,29 @@
   </div>
 </div>
 <div class="justify-content-center mt-5">
-
+  <h3 class="text-center">Detalles del pedido</h3>
+  <div class="m-5">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th class="table-dark">Producto</th>
+          <th class="table-dark">Cantidad</th>
+          <th class="table-dark">Precio unitario</th>
+          <th class="table-dark">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of orderDetails;">
+          <td>
+          <a [routerLink]="['/category', getProductByOrderDetail(detail).category_id ,'products']" [queryParams]="{product_id: getProductByOrderDetail(detail).id}">
+            {{ getProductByOrderDetail(detail).name}}</a>
+          </td>
+          <td>{{ detail.quantity }}</td>
+          <td>{{ getProductByOrderDetail(detail).price }}</td>
+          <td *ngIf="detail.subtotal">{{detail.subtotal}}</td>
+          <td *ngIf="!detail.subtotal || detail.subtotal === 0" >{{ getProductByOrderDetail(detail).price * detail.quantity }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

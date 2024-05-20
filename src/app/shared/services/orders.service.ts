@@ -76,4 +76,15 @@ export class OrdersService {
       };
     }
   }
+
+  // Obtener el producto mas caro de un pedido
+  getDetailWithMostExpensiveProduct(orderId: number): OrderDetail {
+    const details = this.getDetailsByOrderId(orderId);
+    // Considerar solamente los detalles que tengan subtotal mayor a 0
+    details.filter(detail => detail.subtotal > 0);
+    // Retornar el producto mas caro
+    return details.reduce((previous, current) => {
+      return previous.subtotal > current.subtotal ? previous : current;
+    });
+  }
 }
