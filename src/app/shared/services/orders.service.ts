@@ -7,21 +7,21 @@ export class OrdersService {
   orders: Order[] = [
     {
       id: 1,
-      status: 'Delivered',
+      status: 'Completed',
       total: 1000,
       order_date: '2021-01-01',
       delivery_date: '2021-01-05'
     },
     {
       id: 2,
-      status: 'Delivered',
+      status: 'Pending',
       total: 2000,
       order_date: '2021-02-01',
       delivery_date: '2021-02-05'
     },
     {
       id: 3,
-      status: 'Delivered',
+      status: 'Sent',
       total: 3000,
       order_date: '2021-03-01',
       delivery_date: '2021-03-05'
@@ -50,6 +50,15 @@ export class OrdersService {
 
   getDetailsByOrderId(orderId: number): OrderDetail[] {
     return this.orderDetails.filter(detail => detail.order_id === orderId);
+  }
+
+  addNewOrder(order: Order): void {
+    this.orders.push(order);
+  }
+
+  setDetailToOrder(orderId: number, details: OrderDetail[]): void {
+    this.orderDetails = this.orderDetails.filter(detail => detail.order_id !== orderId);
+    this.orderDetails.push(...details);
   }
 
   getOrderById(orderId: number): Order {

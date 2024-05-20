@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Order, OrderDetail } from '../../interfaces/order.interface';
+import { OrdersService } from '../../services/orders.service';
+import { Product } from '@products/interfaces/product.interface';
+import { ProductService } from '../../../products/services/product.service';
 @Component({
   selector: 'app-order-status-page',
   templateUrl: './order-status-page.component.html',
@@ -7,35 +11,55 @@ import { Order, OrderDetail } from '../../interfaces/order.interface';
 })
 export class OrderStatusPageComponent implements OnInit {
 
-  order: Order = {
-    id: 1,
-    status: 'Delivered',
-    total: 1000,
-    order_date: '2021-01-01',
-    delivery_date: '2021-01-05'
-  };
+  order!: Order;
+  orderDetails: OrderDetail[] = [];
+  products: Product[] = [];
 
-  orderDetails: OrderDetail[] = [
-    {
-      id: 1,
-      order_id: 1,
-      product_id: 1,
-      quantity: 2,
-      subtotal: 2000
-    },
-    {
-      id: 2,
-      order_id: 1,
-      product_id: 2,
-      quantity: 1,
-      subtotal: 1000
-    }
-  ];
-
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router: Router, private orderService: OrdersService, private productService: ProductService) { }
 
   ngOnInit(): void {
+    // Extract order ID from the URL
+    this.route.params.subscribe(params => {
+
+      const orderId = +params['id'];
+      this.getOrderDetailsByOrderId(orderId);
+      this.getOrderByOrderId(orderId);
+
+
+    });
   }
 
+  getOrderStatusLabelTranslated() {
+    switch (this.order.status) {
+      case 'Completed':
+        return 'Pedido completado';
+      case 'Pending':
+        return 'Pedido en almacen';
+      case 'Sent':
+        return 'Pedido enviado';
+      default:
+        return 'Estado desconocido';
+    }
+  }
+
+  getOrderDetails(): void {
+    this.orderDetails = this.orderService.getDetailsByOrderId(this.order.id);
+  }
+
+  getOrderDetailsByOrderId(orderId: number): void {
+    this.orderDetails = this.orderService.getDetailsByOrderId(orderId);
+  }
+
+  getOrderByOrderId(orderId: number): void {
+    this.order = this.orderService.getOrderById(orderId);
+  }
+
+  getProductById(productId: number): Product {
+    return this.productService.getProductById(productId);
+  }
+
+  getProductByOrderDetail(orderDetail: OrderDetail): Product {
+    return this.getProductById(orderDetail.product_id);
+  }
 
 }
