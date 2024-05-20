@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Order } from '@shared/intefaces/order.interface';
+import { OrdersService } from '../../services/orders.service';
 
 @Component({
   selector: 'app-order-history-page',
@@ -34,9 +35,14 @@ export class OrderHistoryPageComponent {
     }
   ];
 
-  constructor() { }
+  constructor(private orderService: OrdersService) { }
 
   ngOnInit(): void {
+    this.orders = this.getOrders();
+  }
+
+  getOrders(): Order[] {
+    return this.orderService.getOrders();
   }
 
 

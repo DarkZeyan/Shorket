@@ -77,6 +77,10 @@ export class OrdersService {
     }
   }
 
+  getOrders(): Order[] {
+    return this.orders
+  }
+
   // Obtener el producto mas caro de un pedido
   getDetailWithMostExpensiveProduct(orderId: number): OrderDetail {
     const details = this.getDetailsByOrderId(orderId);
