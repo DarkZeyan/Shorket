@@ -22,18 +22,20 @@ import { CategoryPageComponent } from './pages/category-page/category-page.compo
 import { TableComponentComponent } from './pages/cart-page/components/table-component/table-component.component';
 import { PaymentMethodComponent } from './pages/cart-page/components/payment-method/payment-method.component';
 import { WishListComponent } from './pages/wish-list/wish-list.component';
+import { PromotionsPageComponent } from './pages/promotions-page/promotions-page.component';
 
 
 
-const routes:Routes = [
+const routes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'addresses', component: AddressesPageComponent },
   { path: 'cart', component: CartPageComponent },
   { path: 'categories', component: CategoryPageComponent },
   { path: 'category/:name', component: CatalogPageComponent },
   { path: 'order-history', component: OrderHistoryPageComponent },
-  { path: 'order/:id', component: OrderStatusPageComponent},
-  { path: 'wish-list', component: WishListComponent},
+  { path: 'order/:id', component: OrderStatusPageComponent },
+  { path: 'wish-list', component: WishListComponent },
+  { path: 'promotions', component: PromotionsPageComponent },
   { path: 'admin', component: AdminPageComponent }
 ];
 
@@ -51,7 +53,8 @@ const routes:Routes = [
     CategoryPageComponent,
     TableComponentComponent,
     PaymentMethodComponent,
-    WishListComponent
+    WishListComponent,
+    PromotionsPageComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +63,7 @@ const routes:Routes = [
     MainPageModule,
     RouterModule.forChild(routes)
   ],
-  exports:[
+  exports: [
     MainPageComponent,
     AddressesPageComponent,
     CartPageComponent,

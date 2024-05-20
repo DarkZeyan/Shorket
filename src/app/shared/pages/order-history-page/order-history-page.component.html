@@ -12,7 +12,8 @@
     <thead>
       <tr>
         <th scope="col">Orden No.</th>
-        <th scope="col">Fecha</th>
+        <th scope="col">Fecha de creacion</th>
+        <th scope="col">Fecha de entrega</th>
         <th scope="col">Total</th>
         <th scope="col">Estado</th>
         <th scope="col" >Ver estado y detalles</th>
@@ -22,6 +23,7 @@
       <tr *ngFor="let order of orders; let index = index">
         <th scope="row">{{index+1}}</th>
         <td>{{order.order_date | date: "dd/MM/yyyy"}}</td>
+        <td>{{order.delivery_date | date: "dd/MM/yyyy"}}</td>
         <td>{{order.total | currency}}</td>
         <td>{{order.status}}</td>
         <td>
@@ -30,5 +32,4 @@
       </tr>
     </tbody>
   </table>
-</div>
 </div>

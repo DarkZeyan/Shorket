@@ -1,0 +1,17 @@
+.primary-product img {
+  width: 250px;
+  height: 250px;
+}
+
+.order-status-card{
+  min-height: 400px;
+}
+
+.delivery-date-label{
+  max-width: fit-content;
+}
+
+a{
+  text-decoration: none;
+  font-weight: bold;
+}

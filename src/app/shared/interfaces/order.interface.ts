@@ -1,4 +1,4 @@
-export interface Order{
+export interface Order {
   id: number;
   status: string;
   total: number
@@ -6,15 +6,15 @@ export interface Order{
   delivery_date?: string;
 }
 
-export interface OrderDetail{
+export interface OrderDetail {
   id: number;
   order_id: number;
   product_id: number;
   quantity: number;
-  subtotal?: number;
+  subtotal: number;
 }
 
-export interface OrderUserAddress{
+export interface OrderUserAddress {
   user_id: number;
   address_id: number;
   order_id: number;
