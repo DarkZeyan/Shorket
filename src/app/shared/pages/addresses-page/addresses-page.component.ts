@@ -23,6 +23,7 @@ export class AddressesPageComponent {
       // Define form controls for each address field
 
 
+      full_name: ['', Validators.required],
       address_line1: ['', Validators.required],
       address_line2: [''],
       city: ['', Validators.required],
