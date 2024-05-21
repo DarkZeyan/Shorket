@@ -7,7 +7,7 @@ import { User } from '../interfaces/user.interface';
 export class UsersService {
   private users: User[] = [
     {
-      id: 1,
+      user_id: 1,
       name: 'John',
       last_name: 'Doe',
       email: 'user@example.com',
@@ -15,7 +15,7 @@ export class UsersService {
       birth_date: '1990-01-01'
     },
     {
-      id: 2,
+      user_id: 2,
       name: 'Jane',
       last_name: 'Doe',
       email: 'jane@example.com',
@@ -23,7 +23,7 @@ export class UsersService {
       birth_date: '1992-01-01'
     },
     {
-      id: 3,
+      user_id: 3,
       name: 'Zeyan',
       last_name: 'Bugarini',
       email: 'jorge.bugarini@example.com',
@@ -37,7 +37,7 @@ export class UsersService {
   }
 
   getUserById(id: number): User {
-    const user = this.users.find(user => user.id === id);
+    const user = this.users.find(user => user.user_id === id);
     if (!user) {
       throw new Error(`User with id ${id} not found`);
     }

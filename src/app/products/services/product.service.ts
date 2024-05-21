@@ -22,7 +22,7 @@ export class ProductService {
 
   private products: Product[] = [
     {
-      id: 1,
+      product_id: 1,
       category_id: 1,
       name: 'Macbook Pro',
       brand: 'Apple',
@@ -32,7 +32,7 @@ export class ProductService {
       image: 'assets/product-imgs/image-not-available.png'
     },
     {
-      id: 2,
+      product_id: 2,
       category_id: 1,
       name: 'Macbook Air',
       brand: 'Apple',
@@ -42,7 +42,7 @@ export class ProductService {
       image: 'assets/product-imgs/image-not-available.png'
     },
     {
-      id: 3,
+      product_id: 3,
       category_id: 1,
       name: 'Macbook Pro 16"',
       brand: 'Apple',
@@ -52,7 +52,7 @@ export class ProductService {
       image: 'assets/product-imgs/image-not-available.png'
     },
     {
-      id: 4,
+      product_id: 4,
       category_id: 1,
       name: 'iMac',
       brand: 'Apple',
@@ -62,7 +62,7 @@ export class ProductService {
       image: 'assets/product-imgs/image-not-available.png'
     },
     {
-      id: 5,
+      product_id: 5,
       category_id: 1,
       name: 'Mac Mini',
       brand: 'Apple',
@@ -72,7 +72,7 @@ export class ProductService {
       image: 'assets/product-imgs/image-not-available.png'
     },
     {
-      id: 6,
+      product_id: 6,
       category_id: 2,
       name: 'iPhone 12',
       brand: 'Apple',

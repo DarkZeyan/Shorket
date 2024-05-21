@@ -13,21 +13,21 @@ export class OrderHistoryPageComponent {
 
   orders: Order[] = [
     {
-      id: 1,
+      order_id: 1,
       status: 'Delivered',
       total: 1000,
       order_date: '2021-01-01',
       delivery_date: '2021-01-05'
     },
     {
-      id: 2,
+      order_id: 2,
       status: 'Delivered',
       total: 2000,
       order_date: '2021-02-01',
       delivery_date: '2021-02-05'
     },
     {
-      id: 3,
+      order_id: 3,
       status: 'Delivered',
       total: 3000,
       order_date: '2021-03-01',

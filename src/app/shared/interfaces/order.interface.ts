@@ -1,5 +1,5 @@
 export interface Order {
-  detail_id: number;
+  order_id: number;
   status: string;
   total: number
   order_date: string;
