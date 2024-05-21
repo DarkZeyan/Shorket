@@ -5,12 +5,12 @@ import { Review } from '@products/interfaces/product-review.interface';
 export class ProductService {
 
   private Reviews: Review[] = [
-    { id: 1, product_id: 1, user_id: 1, rating: 5, title: 'Great product', commentary: 'I love this product!' },
-    { id: 2, product_id: 1, user_id: 2, rating: 4, title: 'Good product', commentary: 'I like this product!' },
-    { id: 3, product_id: 1, user_id: 3, rating: 3, title: 'Ok product', commentary: 'This product is ok!' },
-    { id: 4, product_id: 2, user_id: 1, rating: 5, title: 'Great product', commentary: 'I love this product!' },
-    { id: 5, product_id: 2, user_id: 2, rating: 4, title: 'Good product', commentary: 'I like this product!' },
-    { id: 6, product_id: 2, user_id: 3, rating: 3, title: 'Ok product', commentary: 'This product is ok!' },
+    { review_id: 1, product_id: 1, user_id: 1, rating: 5, title: 'Great product', commentary: 'I love this product!' },
+    { review_id: 2, product_id: 1, user_id: 2, rating: 4, title: 'Good product', commentary: 'I like this product!' },
+    { review_id: 3, product_id: 1, user_id: 3, rating: 3, title: 'Ok product', commentary: 'This product is ok!' },
+    { review_id: 4, product_id: 2, user_id: 1, rating: 5, title: 'Great product', commentary: 'I love this product!' },
+    { review_id: 5, product_id: 2, user_id: 2, rating: 4, title: 'Good product', commentary: 'I like this product!' },
+    { review_id: 6, product_id: 2, user_id: 3, rating: 3, title: 'Ok product', commentary: 'This product is ok!' },
   ];
 
 
