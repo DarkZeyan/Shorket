@@ -1,5 +1,5 @@
 export interface Promotion {
-  id: number;
+  promotion_id: number;
   code: string;
   discount: number;
   start_date: string;

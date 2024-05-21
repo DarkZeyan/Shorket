@@ -12,22 +12,22 @@ import { CartService } from '../cart-page/services/cart.service';
 export class WishListComponent implements OnInit {
 
   WishList: WishList = {
-    id: 1,
+    list_id: 1,
     user_id: 1,
   };
   WishListDetails: WishListDetail[] = [
     {
-      id: 1,
+      detail_id: 1,
       list_id: 1,
       product_id: 1
     },
     {
-      id: 1,
+      detail_id: 1,
       list_id: 1,
       product_id: 1
     },
     {
-      id: 1,
+      detail_id: 1,
       list_id: 1,
       product_id: 1
     }

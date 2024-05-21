@@ -3,11 +3,11 @@
 </h3>
 <div class="m-5">
   <div class="row">
-    <div *ngFor="let category of categories" class="col-md-4 col-sm-7">
-      <a [routerLink]="['/category',category.name]" [queryParams]="{id:category.id}">
+    <div *ngFor="let category of categories | async" class="col-md-4 col-sm-7">
+      <a [routerLink]="['/category',category.name]" [queryParams]="{id:category.category_id}">
       <div class="card mb-4 text-center">
 
-        <img [src]="category.image" alt="" class="card-img-top cat-img mx-auto d-block mt-3">
+        <img [src]="getCategoryImage(category)" alt="" class="card-img-top cat-img mx-auto d-block mt-3">
 
         <div class="card-body">
           <h5 class="card-text">

@@ -1,5 +1,5 @@
 export interface Order {
-  id: number;
+  detail_id: number;
   status: string;
   total: number
   order_date: string;
@@ -7,7 +7,7 @@ export interface Order {
 }
 
 export interface OrderDetail {
-  id: number;
+  detail_id: number;
   order_id: number;
   product_id: number;
   quantity: number;

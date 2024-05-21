@@ -1,10 +1,10 @@
 export interface WishList {
-  id: number;
+  list_id: number;
   user_id: number;
 }
 
 export interface WishListDetail {
-  id: number;
+  detail_id: number;
   list_id: number;
   product_id: number
 }

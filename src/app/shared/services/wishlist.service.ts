@@ -6,7 +6,7 @@ import { Product } from '@products/interfaces/product.interface';
 export class WishListService {
 
   WishList: WishList = {
-    id: 0,
+    list_id: 0,
     user_id: 0,
   };
 
@@ -14,7 +14,7 @@ export class WishListService {
 
   WishListDetails: WishListDetail[] = [
     {
-      id: 0,
+      detail_id: 0,
       list_id: 0,
       product_id: 0
     }

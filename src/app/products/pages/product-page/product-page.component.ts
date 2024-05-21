@@ -8,7 +8,7 @@ import { Review } from '@products/interfaces/product-review.interface';
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss'],
 })
-export class ProductPageComponent  implements OnInit {
+export class ProductPageComponent implements OnInit {
 
 
   product!: Product;
@@ -27,12 +27,12 @@ export class ProductPageComponent  implements OnInit {
     this.route.queryParams.subscribe(params => {
       const product_id = +params['product_id'];
       this.product = this.getProductById(product_id);
-      this.reviews = this.getReviewsByProductId(this.product.id);
-      this.suggestedProducts = this.getSuggestedProducts(this.product.id, this.product.category_id);
+      this.reviews = this.getReviewsByProductId(this.product.product_id);
+      this.suggestedProducts = this.getSuggestedProducts(this.product.product_id, this.product.category_id);
     });
 
   }
-  getProductById(product_id: number){
+  getProductById(product_id: number) {
     return this.ProductService.getProductById(product_id);
   }
   getReviewsByProductId(product_id: number): Review[] {
@@ -40,7 +40,7 @@ export class ProductPageComponent  implements OnInit {
   }
 
   getSuggestedProducts(product_id: number, category_id: number): Product[] {
-    return this.ProductService.getSuggestedProductsByCategory(product_id ,category_id);
+    return this.ProductService.getSuggestedProductsByCategory(product_id, category_id);
   }
 
 }
