@@ -1,1 +1,26 @@
-<p>promotions-page works!</p>
+<div class="justify-content-center m-5" style="min-height: 55vh;">
+
+<h1 class="text-center">Promociones</h1>
+
+
+<div class="alert alert-info" *ngIf="promotions.length==0">
+  <h4 class="text-center">No hay promociones activas</h4>
+</div>
+  <div class="row m-3" *ngIf="promotions.length>0">
+    <div *ngFor="let promotion of promotions; let i = index;" class="col-sm-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span class="bi bi-gift"></span> Promocion activa {{i+1}}
+          </h5>
+          <p class="card-text"> Disponible hasta {{promotion.end_date | date: "dd/MM/yyyy" }} </p>
+          <!-- Codigo promocional -->
+          <p class="card-text"> Codigo promocional: <strong>{{promotion.code}}</strong></p>
+          <!-- Descuento -->
+          <p class="card-text"> Descuento: {{promotion.discount | percent}} </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

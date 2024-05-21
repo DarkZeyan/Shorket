@@ -1,7 +1,13 @@
-<div class="justiy-content-center m-5">
+<div class="justiy-content-center m-5" style="min-height: 55vh;">
   <h1 class="text-center">Lista de deseados</h1>
 
   <!-- Crear cartas de wishlist -->
+  <!--
+    Si no hay wishlist, mostrar un mensaje de que no hay productos en la lista de deseos
+  -->
+  <div class="alert alert-info" *ngIf="WishListDetails.length==0">
+    <h4 class="text-center">No hay productos en la lista de deseos</h4>
+  </div>
   <div class="row m-3" *ngIf="WishListDetails.length>0">
     <div *ngFor="let wishListDetail of WishListDetails;" class="col-sm-4 mb-3">
       <div class="card">
@@ -9,8 +15,6 @@
           <h5 class="card-title text-center"> <span class="bi bi-heart-fill"></span>  {{getProductById(wishListDetail.product_id).name}}</h5>
           <img [src]="getProductById(wishListDetail.product_id).image" class="card-img" [alt]="getProductById(wishListDetail.product_id).name">
           <p class="card-text"> <span class="bi bi-cash"></span> Precio: {{getProductById(wishListDetail.product_id).price | currency}}</p>
-
-
           <!-- Botones para agregar al carrito y eliminarlo de la wishlist  -->
           <div class="d-flex">
             <button class="btn btn-primary mx-auto" >Agregar al carrito</button>
