@@ -5,7 +5,6 @@ export interface WishList {
 
 export interface WishListDetail {
   id: number;
-  wishlist_id: number;
-  product_id: number;
-  quantity: number;
+  list_id: number;
+  product_id: number
 }
