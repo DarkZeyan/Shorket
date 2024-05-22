@@ -13,9 +13,9 @@
       <div class="col-md-3">
         <div class="card bg-transparent">
           <div class="card-body">
-            <img [src]="getMostExpensiveProductByOrderDetail(order.order_id).image" alt=""
+            <img [src]="(getMostExpensiveProductByOrderDetail(order.order_id)|async)?.image" alt=""
               class="primary-product card-img-top mx-auto d-block">
-            <h4 class="card-title mt-3 text-center"> <strong>{{getMostExpensiveProductByOrderDetail(order.order_id).name | uppercase}}</strong> </h4>
+            <h4 class="card-title mt-3 text-center"> <strong>{{(getMostExpensiveProductByOrderDetail(order.order_id)|async)?.name | uppercase}}</strong> </h4>
           </div>
         </div>
       </div>
@@ -80,13 +80,12 @@
       <tbody>
         <tr *ngFor="let detail of orderDetails;">
           <td>
-          <a [routerLink]="['/category', getProductByOrderDetail(detail).category_id ,'products']" [queryParams]="{product_id: getProductByOrderDetail(detail).product_id}">
-            {{ getProductByOrderDetail(detail).name}}</a>
+          <a [routerLink]="['/category', (getProductByOrderDetail(detail)|async)?.category_id ,'products']" [queryParams]="{product_id: (getProductByOrderDetail(detail)|async)?.product_id}">
+            {{ (getProductByOrderDetail(detail)|async)?.name}}</a>
           </td>
           <td>{{ detail.quantity }}</td>
-          <td>{{ getProductByOrderDetail(detail).price | currency}}</td>
+          <td>{{ (getProductByOrderDetail(detail)|async)?.price | currency}}</td>
           <td *ngIf="detail.subtotal">{{detail.subtotal | currency }}</td>
-          <td *ngIf="!detail.subtotal || detail.subtotal === 0" >{{ getProductByOrderDetail(detail).price * detail.quantity | currency }}</td>
         </tr>
       </tbody>
     </table>

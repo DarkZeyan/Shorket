@@ -6,3 +6,11 @@ export interface Review {
   title: string;
   commentary?: string;
 }
+
+export interface ProductReview {
+  product_id: number;
+  title: string;
+  rating: number;
+  commentary?: string;
+  customer_name: string;
+}

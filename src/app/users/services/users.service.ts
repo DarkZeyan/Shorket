@@ -76,9 +76,9 @@ export class UsersService {
     let UserName = '';
     user.subscribe(user => {
       if (user) {
-        UserName = user.name;
+        return user.name;
       }
-      UserName = 'Unknown User'
+      return 'Unknown User'
     });
     return UserName;
 

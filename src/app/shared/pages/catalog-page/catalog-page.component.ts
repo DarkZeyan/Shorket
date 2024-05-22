@@ -15,7 +15,7 @@ export class CatalogPageComponent implements OnInit {
   category!: Category;
   public category_id: number = 0;
   public banner_img: string | Blob = '';
-  public products: Product[] = [];
+  public products: Observable<Product[]> = new Observable<Product[]>();
   constructor(private route: ActivatedRoute, private productService: ProductService, private categoryService: CategoryService) {
 
   }

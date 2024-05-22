@@ -4,6 +4,7 @@ import { ProductService } from '../../../products/services/product.service';
 import { WishListService } from '../../services/wishlist.service';
 import { Product } from '@products/interfaces/product.interface';
 import { CartService } from '../cart-page/services/cart.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-wish-list',
   templateUrl: './wish-list.component.html',
@@ -38,7 +39,7 @@ export class WishListComponent implements OnInit {
   ngOnInit() { }
 
 
-  getProductById(productId: number): Product {
+  getProductById(productId: number): Observable<Product> {
     return this.productService.getProductById(productId);
   }
 

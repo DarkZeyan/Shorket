@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Modal } from 'bootstrap';
@@ -11,7 +11,7 @@ import { UsersService } from '../../services/users.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent implements AfterViewInit {
+export class LoginPageComponent implements AfterViewInit, OnInit {
 
   modal!: Modal;
   loginForm: FormGroup;
@@ -23,12 +23,21 @@ export class LoginPageComponent implements AfterViewInit {
   registerFailed: boolean = false;
   registerSuccess: boolean = false;
 
+  ngOnInit(): void {
+    const user = this.usersService.getUserFromCookies();
+    if (user) {
+      this.router.navigate(['/home']);
+    }
+  }
+
   constructor(private fb: FormBuilder, private router: Router, private usersService: UsersService) {
     this.loginForm = this.fb.group({
       // Define form controls for each login field
       email_login: ['', Validators.required],
       password_login: ['', Validators.required]
     });
+
+
 
     this.registerForm = this.fb.group({
       // Define form controls for each register field

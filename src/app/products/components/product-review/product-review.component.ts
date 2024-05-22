@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Review } from '@products/interfaces/product-review.interface';
+import { ProductReview, } from '@products/interfaces/product-review.interface';
 import { UsersService } from '../../../users/services/users.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'product-reviews',
@@ -10,13 +11,10 @@ import { UsersService } from '../../../users/services/users.service';
 export class ProductReviewComponent {
 
   @Input()
-  reviews: Review[] = [];
+  reviews!: Observable<ProductReview[]>;
 
-  constructor(private userService:UsersService) { }
+  constructor(private userService: UsersService) { }
   getStarsImagePath(rating: number): string {
     return `assets/${rating}-stars.png`;
-  }
-  getUserNameById(id: number): string {
-    return this.userService.getUserNameById(id);
   }
 }

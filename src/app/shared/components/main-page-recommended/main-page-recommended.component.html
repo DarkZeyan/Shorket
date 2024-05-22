@@ -1,7 +1,7 @@
 <div class="mt-5 mb-3">
   <div class="d-flex justify-content-center align-items-center">
-    <div *ngIf="suggestedProducts.length > 0" class="row">
-      <div *ngFor="let product of suggestedProducts" class="col-md-6">
+    <div *ngIf="(suggestedProducts|async)!.length > 0" class="row">
+      <div *ngFor="let product of suggestedProducts | async" class="col-md-6">
         <div class="card mb-2 text-center bg-light">
           <a [routerLink]="['/products']" [queryParams]="{product_id: product.product_id}">
           <img class="card-img-top art-rec-img" [src]="product.image" alt="">

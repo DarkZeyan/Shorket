@@ -4,6 +4,7 @@ import { Order, OrderDetail } from '../../interfaces/order.interface';
 import { OrdersService } from '../../services/orders.service';
 import { Product } from '@products/interfaces/product.interface';
 import { ProductService } from '../../../products/services/product.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-order-status-page',
   templateUrl: './order-status-page.component.html',
@@ -48,15 +49,15 @@ export class OrderStatusPageComponent implements OnInit {
     this.order = this.orderService.getOrderById(orderId);
   }
 
-  getProductById(productId: number): Product {
+  getProductById(productId: number): Observable<Product> {
     return this.productService.getProductById(productId);
   }
 
-  getProductByOrderDetail(orderDetail: OrderDetail): Product {
+  getProductByOrderDetail(orderDetail: OrderDetail): Observable<Product> {
     return this.getProductById(orderDetail.product_id);
   }
 
-  getMostExpensiveProductByOrderDetail(order_id: number): Product {
+  getMostExpensiveProductByOrderDetail(order_id: number): Observable<Product> {
     const detail = this.orderService.getDetailWithMostExpensiveProduct(order_id);
     return this.getProductById(detail.product_id);
   }
