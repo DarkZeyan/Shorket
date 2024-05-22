@@ -12,13 +12,17 @@
     <div *ngFor="let wishListDetail of WishListDetails;" class="col-sm-4 mb-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title text-center"> <span class="bi bi-heart-fill"></span>  {{(getProductById(wishListDetail.product_id)|async)?.name}}</h5>
-          <img [src]="(getProductById(wishListDetail.product_id)|async)?.image" class="card-img" [alt]="(getProductById(wishListDetail.product_id)|async)?.name">
-          <p class="card-text"> <span class="bi bi-cash"></span>  Precio: {{ (getProductById(wishListDetail.product_id) | async)?.price | currency }}</p>
+          <h5 class="card-title text-center"> <span class="bi bi-heart-fill"></span>
+            {{(getProductById(wishListDetail.product_id)|async)?.name}}</h5>
+          <img [src]="(getProductById(wishListDetail.product_id)|async)?.image  !== null ? 'data:image/png;base64,'+(getProductById(wishListDetail.product_id)|async)?.image
+          : 'assets/product-imgs/image-not-available.png'" class="card-img"
+            [alt]="(getProductById(wishListDetail.product_id)|async)?.name">
+          <p class="card-text"> <span class="bi bi-cash"></span> Precio: {{ (getProductById(wishListDetail.product_id) |
+            async)?.price | currency }}</p>
           <!-- Botones para agregar al carrito y eliminarlo de la wishlist  -->
           <div class="d-flex">
-            <button class="btn btn-primary mx-auto" >Agregar al carrito</button>
-            <button class="btn btn-danger mx-auto" >Eliminar de la lista de deseos</button>
+            <button class="btn btn-primary mx-auto">Agregar al carrito</button>
+            <button class="btn btn-danger mx-auto">Eliminar de la lista de deseos</button>
           </div>
         </div>
       </div>
@@ -28,4 +32,3 @@
 
 
 </div>
-

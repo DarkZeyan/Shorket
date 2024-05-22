@@ -2,7 +2,8 @@
   <div class="row">
     <!-- Seccion para la imagen del producto -->
     <div class="col-md-6 text-center">
-      <img [src]="(product|async)?.image" [alt]="(product|async)?.description" class="product-img">
+      <img [src]="(product|async)?.image ? 'data:image/png;base64,'+(product|async)?.image
+      : 'assets/product-imgs/image-not-available.png'" [alt]="(product|async)?.description" class="product-img">
     </div>
     <!-- Seccion de detalles del producto -->
     <div class="col-md-6 product-details">
