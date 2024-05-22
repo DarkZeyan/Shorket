@@ -61,7 +61,7 @@ export class LoginPageComponent implements AfterViewInit {
       this.registerSuccess = true;
       setInterval(() => {
         this.registerSuccess = false;
-      }, 8000);
+      }, 20000);
     }
   }
 }
