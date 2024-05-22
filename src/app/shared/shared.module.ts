@@ -29,7 +29,7 @@ import { Error403PageComponent } from './pages/403/403.component';
 
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent },
+  { path: 'home', component: MainPageComponent },
   { path: 'addresses', component: AddressesPageComponent },
   { path: 'cart', component: CartPageComponent },
   { path: 'categories', component: CategoryPageComponent },
@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'order/:id', component: OrderStatusPageComponent },
   { path: 'wish-list', component: WishListComponent },
   { path: 'promotions', component: PromotionsPageComponent },
-  { path: 'admin', component: AdminPageComponent }
+  { path: 'admin', component: AdminPageComponent },
 ];
 
 @NgModule({
