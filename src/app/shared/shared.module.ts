@@ -23,6 +23,8 @@ import { TableComponentComponent } from './pages/cart-page/components/table-comp
 import { PaymentMethodComponent } from './pages/cart-page/components/payment-method/payment-method.component';
 import { WishListComponent } from './pages/wish-list/wish-list.component';
 import { PromotionsPageComponent } from './pages/promotions-page/promotions-page.component';
+import { Error404PageComponent } from './pages/404/404.component';
+import { Error403PageComponent } from './pages/403/403.component';
 
 
 
@@ -54,7 +56,9 @@ const routes: Routes = [
     TableComponentComponent,
     PaymentMethodComponent,
     WishListComponent,
-    PromotionsPageComponent
+    PromotionsPageComponent,
+    Error403PageComponent,
+    Error404PageComponent
   ],
   imports: [
     CommonModule,

@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsModule } from './products/products.module';
 import myLocale from '@angular/common/locales/es-MX'
 import { HttpClientModule } from '@angular/common/http';
+import { UsersModule } from './users/users.module';
 
 registerLocaleData(myLocale, 'es-MX');
 
@@ -21,6 +22,7 @@ registerLocaleData(myLocale, 'es-MX');
     AppRoutingModule,
     SharedModule,
     ProductsModule,
+    UsersModule,
     NgbModule
   ],
   providers: [],

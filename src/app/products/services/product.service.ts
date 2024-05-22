@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { Product } from '@products/interfaces/product.interface';
 import { Review } from '@products/interfaces/product-review.interface';
+
 @Injectable({ providedIn: 'root' })
 export class ProductService {
 
@@ -12,6 +18,7 @@ export class ProductService {
     { review_id: 5, product_id: 2, user_id: 2, rating: 4, title: 'Good product', commentary: 'I like this product!' },
     { review_id: 6, product_id: 2, user_id: 3, rating: 3, title: 'Ok product', commentary: 'This product is ok!' },
   ];
+
 
 
   private product!: Product;

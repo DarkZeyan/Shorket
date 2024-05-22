@@ -80,7 +80,7 @@
       <tbody>
         <tr *ngFor="let detail of orderDetails;">
           <td>
-          <a [routerLink]="['/products']" [queryParams]="{product_id: getProductByOrderDetail(detail).product_id}">
+          <a [routerLink]="['/category', getProductByOrderDetail(detail).category_id ,'products']" [queryParams]="{product_id: getProductByOrderDetail(detail).product_id}">
             {{ getProductByOrderDetail(detail).name}}</a>
           </td>
           <td>{{ detail.quantity }}</td>
