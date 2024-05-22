@@ -2,8 +2,9 @@ import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Modal } from 'bootstrap';
-import { last } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from '../../interfaces/user.interface';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-login-page',
@@ -22,7 +23,7 @@ export class LoginPageComponent implements AfterViewInit {
   registerFailed: boolean = false;
   registerSuccess: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private usersService: UsersService) {
     this.loginForm = this.fb.group({
       // Define form controls for each login field
       email_login: ['', Validators.required],
@@ -45,23 +46,92 @@ export class LoginPageComponent implements AfterViewInit {
   }
 
   onSubmit(): void {
-    console.log('Entro')
     if (this.loginForm.valid) {
       // Call the login service
       console.log(this.loginForm.value);
-      this.loginForm.reset();
-      // this.router.navigate(['/home']);
+      this.usersService.getUserByEmailPassword(this.loginForm.value.email_login, this.loginForm.value.password_login).subscribe(
+        (user: User | null) => {
+          // Handle successful login
+          if (user) {
+            console.log(user);
+            this.loginForm.reset();
+            this.router.navigate(['/home']);
+          }
+          else {
+            console.log('Login failed');
+            this.loginFailed = true;
+            setInterval(() => {
+              this.loginFailed = false;
+            }, 20000);
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
     }
   }
   onSubmitRegister(): void {
     if (this.registerForm.valid) {
-      // Call the register service
-      this.registerForm.reset();
-      this.modal.hide();
-      this.registerSuccess = true;
-      setInterval(() => {
-        this.registerSuccess = false;
-      }, 20000);
+
+      if (this.registerForm.value.password !== this.registerForm.value.verify_password) {
+        this.registerFailed = true;
+        setInterval(() => {
+          this.registerFailed = false;
+        }, 20000);
+        return;
+      }
+
+      // Convert the birth_date to a string
+      console.log(this.registerForm.value.birth_date);
+      const birth_date = `${this.registerForm.value.birth_date.year}-${this.registerForm.value.birth_date.month}-${this.registerForm.value.birth_date.year}`;
+      this.registerForm.value.birth_date = birth_date;
+
+      // Delete the verify_password field
+      delete this.registerForm.value.verify_password;
+
+      //Convert form data to an User object
+      const user: User = this.registerForm.value;
+
+      // Call the create user service
+      this.usersService.createUser(user).subscribe(
+        (createdUser: User) => {
+          console.log(createdUser);
+
+          // After creating the user, log the user in
+          this.usersService.getUserByEmailPassword(createdUser.email, createdUser.password).subscribe(
+            (loggedInUser: User | null) => {
+              // Handle successful login
+              if (loggedInUser) {
+                console.log(loggedInUser);
+                // Call the register service
+                this.registerForm.reset();
+
+
+                this.modal.hide();
+                this.registerSuccess = true;
+                setInterval(() => {
+                  this.registerSuccess = false;
+                }, 5000);
+                this.router.navigate(['/home']);
+              }
+              else {
+                console.log('Login failed');
+              }
+            },
+            (loginError) => {
+              console.log(loginError);
+            }
+          );
+        },
+        (createError) => {
+          console.log(createError);
+        }
+      );
+
+
+
     }
   }
 }

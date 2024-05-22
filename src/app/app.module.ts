@@ -9,6 +9,7 @@ import { ProductsModule } from './products/products.module';
 import myLocale from '@angular/common/locales/es-MX'
 import { HttpClientModule } from '@angular/common/http';
 import { UsersModule } from './users/users.module';
+import { CookieService } from 'ngx-cookie-service';
 
 registerLocaleData(myLocale, 'es-MX');
 
@@ -25,7 +26,7 @@ registerLocaleData(myLocale, 'es-MX');
     UsersModule,
     NgbModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
