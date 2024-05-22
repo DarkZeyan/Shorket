@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '@shared/intefaces/category.interface';
 import { CategoryService } from '../../services/category.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-category-page',
@@ -17,24 +17,5 @@ export class CategoryPageComponent implements OnInit {
     this.categories = this.CategoryService.getCategories();
   }
 
-
-  getCategoryImage(category: Category) {
-    if (category.image instanceof Blob) {
-      this.getImageAsString(category.image).then(imageBase64 => {
-        category.image = imageBase64;
-      });
-    }
-  }
-
-  getImageAsString(image: Blob): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onloadend = () => {
-        resolve(reader.result as string);
-      };
-      reader.onerror = reject;
-    });
-  }
 
 }

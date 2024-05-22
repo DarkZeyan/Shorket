@@ -12,17 +12,25 @@ export class CategoryService {
   constructor(private httpClient: HttpClient) {
     this.httpClient.get<Category[]>('http://localhost:8000/categories').subscribe(data => {
       this.categories.next(data);
+      console.log(data);
     });
-    console.log(this.categories.value);
+
   }
 
   getCategories(): Observable<Category[]> {
     return this.categories.asObservable();
   }
 
-  // getCategoryById(id: number): Observable<Category> {
-  //   return this.categories.asObservable().pipe(
-  //     map(categories => categories.find(category => category.category_id === id))
-  //   );
-  // }
+  getCategoryById(id: number): Observable<Category> {
+    return this.categories.asObservable().pipe(
+      map(categories => {
+        console.log(categories);
+        const category = categories.find(category => category.category_id === id);
+        if (!category) {
+          throw new Error('Category not found');
+        }
+        return category;
+      })
+    );
+  }
 }
