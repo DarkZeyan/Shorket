@@ -94,7 +94,7 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
 
       // Convert the birth_date to a string
       console.log(this.registerForm.value.birth_date);
-      const birth_date = `${this.registerForm.value.birth_date.year}-${this.registerForm.value.birth_date.month}-${this.registerForm.value.birth_date.year}`;
+      const birth_date = `${this.registerForm.value.birth_date.year}-${this.registerForm.value.birth_date.month}-${this.registerForm.value.birth_date.day}`;
       this.registerForm.value.birth_date = birth_date;
 
       // Delete the verify_password field
@@ -113,7 +113,7 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
             (loggedInUser: User | null) => {
               // Handle successful login
               if (loggedInUser) {
-                console.log(loggedInUser);
+
                 // Call the register service
                 this.registerForm.reset();
 
