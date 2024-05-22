@@ -22,7 +22,7 @@
   <div *ngFor="let product of suggestedProducts" class="row justify-content-center mt-3  m-1">
     <div class="col-6 mb-3">
       <div class="card  bg-opacity-25 text-center align-items-center">
-        <a [routerLink]="['/category',product.category_id,'products']" [queryParams]="{product_id: product.product_id}" class="product-link">
+        <a [routerLink]="['/products']" [queryParams]="{product_id: product.product_id}" class="product-link">
         <img [src]="product.image" [alt]="product.name" class="product-img card-img-top mt-3 ">
         <div class="card-body">
           <div class="text-center align-items-center">

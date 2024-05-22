@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'addresses', component: AddressesPageComponent },
   { path: 'cart', component: CartPageComponent },
   { path: 'categories', component: CategoryPageComponent },
-  { path: 'category/:name', component: CatalogPageComponent },
+  { path: 'category', component: CatalogPageComponent },
   { path: 'order-history', component: OrderHistoryPageComponent },
   { path: 'order/:id', component: OrderStatusPageComponent },
   { path: 'wish-list', component: WishListComponent },

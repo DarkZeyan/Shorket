@@ -9,7 +9,7 @@ import { ProductReviewComponent } from './components/product-review/product-revi
 import { SuggestedProductsComponent } from './components/suggested-products/suggested-products.component';
 
 const routes = [
-  { path: 'category/:category_id/products', component: ProductPageComponent }
+  { path: 'products', component: ProductPageComponent }
 ];
 
 

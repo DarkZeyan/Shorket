@@ -12,8 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class CatalogPageComponent implements OnInit {
 
-  public category: string = '';
-  public category_object!: Category;
+  category!: Category;
   public category_id: number = 0;
   public banner_img: string | Blob = '';
   public products: Product[] = [];
@@ -23,17 +22,12 @@ export class CatalogPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
-      this.category = this.route.snapshot.params['name'];
       this.category_id = +this.route.snapshot.queryParams['id'];
-
       this.products = this.getProductsByCategory(this.category_id);
       this.getCategoryById(this.category_id).subscribe(data => {
-        this.category_object = data;
+        this.category = data;
         this.banner_img = data.banner_image;
       });
-
-
-
     });
 
   }
