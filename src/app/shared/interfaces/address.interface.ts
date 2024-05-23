@@ -1,8 +1,8 @@
 export interface Address {
-  full_name: string;
+  name: string;
   address_id: number;
-  address_line1: string;
-  address_line2?: string;
+  address_line_1: string;
+  address_line_2?: string;
   city: string;
   state: string;
   country: string;
