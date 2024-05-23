@@ -93,6 +93,7 @@ export class CartService {
     const cart = localStorage.getItem('cart');
     if (cart) {
       this.cartItems = JSON.parse(cart);
+      console.log(this.cartItems)
     }
   }
 

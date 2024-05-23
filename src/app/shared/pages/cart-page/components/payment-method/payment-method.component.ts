@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'payment-method',
@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './payment-method.component.css'
 })
 export class PaymentMethodComponent {
-
 
 
 

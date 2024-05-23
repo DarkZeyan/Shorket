@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Order, OrderDetail } from '@shared/intefaces/order.interface';
+import { Order, OrderBody, OrderDetail, OrderDetailBody } from '@shared/intefaces/order.interface';
 import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -67,4 +67,37 @@ export class OrdersService {
 
     return mostExpensiveDetail;
   }
+
+  // Create a new order
+  createOrder(orderBody: OrderBody): Observable<Order> {
+    return this.httpClient.post<Order>(this.API_URL, orderBody);
+  }
+
+  // Create a new order detail
+  createOrderDetail(detail: OrderDetailBody): Observable<OrderDetail> {
+    return this.httpClient.post<OrderDetail>(`${this.API_URL}/details`, detail);
+  }
+
+  // Update order status
+  updateOrderStatus(order_id: number, status: string): Observable<Order> {
+    return this.httpClient.put<Order>(`${this.API_URL}/${order_id}`, { status });
+  }
+
+  // Delete an order
+  deleteOrder(order_id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.API_URL}/${order_id}`);
+  }
+
+  // Delete an order detail
+  deleteOrderDetail(detail_id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.API_URL}/details/${detail_id}`);
+  }
+
+  createOrderUserAddress(user_id: number, address_id: number, order_id: number): Observable<void> {
+    return this.httpClient.post<void>(`${this.API_URL}/`, { user_id, address_id, order_id });
+  }
+
+
+
+
 }
