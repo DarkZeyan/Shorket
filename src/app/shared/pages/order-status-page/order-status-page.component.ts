@@ -4,6 +4,7 @@ import { Order, OrderDetail } from '../../interfaces/order.interface';
 import { OrdersService } from '../../services/orders.service';
 import { Product } from '@products/interfaces/product.interface';
 import { ProductService } from '../../../products/services/product.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-order-status-page',
   templateUrl: './order-status-page.component.html',
@@ -11,8 +12,9 @@ import { ProductService } from '../../../products/services/product.service';
 })
 export class OrderStatusPageComponent implements OnInit {
 
-  order!: Order;
-  orderDetails: OrderDetail[] = [];
+  order: Observable<Order> = new Observable<Order>();
+  statusLabel: string = '';
+  orderDetails: Observable<OrderDetail[]> = new Observable<OrderDetail[]>();
 
   constructor(private route: ActivatedRoute, private router: Router, private orderService: OrdersService, private productService: ProductService) { }
 
@@ -22,13 +24,16 @@ export class OrderStatusPageComponent implements OnInit {
 
       const orderId = +params['id'];
       this.getOrderByOrderId(orderId);
+      this.order.subscribe(order => {
+        this.statusLabel = order.status;
+      });
       this.getOrderDetailsByOrderId(orderId);
 
     });
   }
 
   getOrderStatusLabelTranslated() {
-    switch (this.order.status) {
+    switch (this.statusLabel) {
       case 'Completed':
         return 'Pedido completado';
       case 'Pending':
@@ -41,22 +46,23 @@ export class OrderStatusPageComponent implements OnInit {
   }
 
   getOrderDetailsByOrderId(orderId: number): void {
-    this.orderDetails = this.orderService.getDetailsByOrderId(orderId);
+    this.orderDetails = this.orderService.getOrderDetailsByOrderId(orderId);
   }
 
   getOrderByOrderId(orderId: number): void {
-    this.order = this.orderService.getOrderById(orderId);
+    this.order = this.orderService.getOrderByOrderId(orderId);
   }
 
-  getProductById(productId: number): Product {
+
+  getProductById(productId: number): Observable<Product> {
     return this.productService.getProductById(productId);
   }
 
-  getProductByOrderDetail(orderDetail: OrderDetail): Product {
+  getProductByOrderDetail(orderDetail: OrderDetail): Observable<Product> {
     return this.getProductById(orderDetail.product_id);
   }
 
-  getMostExpensiveProductByOrderDetail(order_id: number): Product {
+  getMostExpensiveProductByOrderDetail(order_id: number): Observable<Product> {
     const detail = this.orderService.getDetailWithMostExpensiveProduct(order_id);
     return this.getProductById(detail.product_id);
   }

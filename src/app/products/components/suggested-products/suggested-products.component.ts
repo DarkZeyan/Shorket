@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '@products/interfaces/product.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'suggested-products',
@@ -8,6 +9,6 @@ import { Product } from '@products/interfaces/product.interface';
 })
 export class SuggestedProductsComponent {
   @Input()
-  suggestedProducts: Product[] = [];
+  suggestedProducts!: Observable<Product[]>;
 
 }

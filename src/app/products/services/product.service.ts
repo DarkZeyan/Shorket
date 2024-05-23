@@ -1,136 +1,103 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { map, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { Product } from '@products/interfaces/product.interface';
-import { Review } from '@products/interfaces/product-review.interface';
-@Injectable({providedIn: 'root'})
+import { ProductReview } from '@products/interfaces/product-review.interface';
+
+@Injectable({ providedIn: 'root' })
 export class ProductService {
 
-  private Reviews: Review[] = [
-    {id: 1, product_id: 1, user_id: 1, rating: 5, title: 'Great product', commentary: 'I love this product!'},
-    {id: 2, product_id: 1, user_id: 2, rating: 4, title: 'Good product', commentary: 'I like this product!'},
-    {id: 3, product_id: 1, user_id: 3, rating: 3, title: 'Ok product', commentary: 'This product is ok!'},
-    {id: 4, product_id: 2, user_id: 1, rating: 5, title: 'Great product', commentary: 'I love this product!'},
-    {id: 5, product_id: 2, user_id: 2, rating: 4, title: 'Good product', commentary: 'I like this product!'},
-    {id: 6, product_id: 2, user_id: 3, rating: 3, title: 'Ok product', commentary: 'This product is ok!'},
-  ];
-
+  private API_URL = 'http://localhost:8000/products';
+  private API_URL_REVIEWS = 'http://localhost:8000/reviews';
 
   private product!: Product;
 
-  getReviewsByProductId(product_id: number): Review[] {
-    return this.Reviews.filter(review => review.product_id === product_id);
+
+  private productReviews: BehaviorSubject<ProductReview[]> = new BehaviorSubject<ProductReview[]>([]);
+  private products: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  private productsLoaded: boolean = false;
+
+  constructor(private httpClient: HttpClient) { }
+
+  getReviewsByProductId(product_id: number): Observable<ProductReview[]> {
+    return this.httpClient.get<ProductReview[]>(`${this.API_URL_REVIEWS}/${product_id}`).pipe(
+      tap(reviews => {
+        this.productReviews.next(reviews);
+      })
+    );
   }
 
-  private products:Product[] = [
-    {
-      id: 1,
-      category_id: 1,
-      name: 'Macbook Pro',
-      brand: 'Apple',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, ex nec luctus ultrices, nunc risus ultricies nunc, nec malesuada mi nisl at justo.',
-      price: 2000,
-      stock: 10,
-      image: 'assets/product-imgs/image-not-available.png'
-    },
-    {
-      id: 2,
-      category_id: 1,
-      name: 'Macbook Air',
-      brand: 'Apple',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, ex nec luctus ultrices, nunc risus ultricies nunc, nec malesuada mi nisl at justo.',
-      price: 1500,
-      stock: 10,
-      image: 'assets/product-imgs/image-not-available.png'
-    },
-    {
-      id: 3,
-      category_id: 1,
-      name: 'Macbook Pro 16"',
-      brand: 'Apple',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, ex nec luctus ultrices, nunc risus ultricies nunc, nec malesuada mi nisl at justo.',
-      price: 2500,
-      stock: 10,
-      image: 'assets/product-imgs/image-not-available.png'
-    },
-    {
-      id: 4,
-      category_id: 1,
-      name: 'iMac',
-      brand: 'Apple',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, ex nec luctus ultrices, nunc risus ultricies nunc, nec malesuada mi nisl at justo.',
-      price: 3000,
-      stock: 10,
-      image: 'assets/product-imgs/image-not-available.png'
-    },
-    {
-      id: 5,
-      category_id: 1,
-      name: 'Mac Mini',
-      brand: 'Apple',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, ex nec luctus ultrices, nunc risus ultricies nunc, nec malesuada mi nisl at justo.',
-      price: 1000,
-      stock: 10,
-      image: 'assets/product-imgs/image-not-available.png'
-    },
-    {
-      id:6,
-      category_id: 2,
-      name: 'iPhone 12',
-      brand: 'Apple',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, ex nec luctus ultrices, nunc risus ultricies nunc, nec malesuada mi nisl at justo.',
-      price: 1000,
-      stock: 10,
-      image: 'assets/product-imgs/image-not-available.png'
+  getProducts(): Observable<Product[]> {
+    if (!this.productsLoaded) {
+      return this.httpClient.get<Product[]>(this.API_URL).pipe(
+        tap(products => {
+          this.products.next(products);
+          this.productsLoaded = true;
+        })
+      );
+    } else {
+      return this.products.asObservable();
     }
-
-  ];
-
-  constructor() { }
-
-  getProduct(): Product {
-    return this.product;
   }
 
-  getProductById(id: number): Product {
-    return this.products.find(product => product.id === id)!;
+  getProductById(id: number): Observable<Product> {
+    return this.httpClient.get<Product>(`${this.API_URL}/${id}`).pipe(
+      tap(product => {
+        this.product = product;
+      })
+    );
   }
 
-  getProductsByCategory(category_id: number): Product[] {
-    return this.products.filter(product => product.category_id === category_id);
+
+  getProductsByCategory(category_id: number): Observable<Product[]> {
+    // Obtener productos por categoría
+    // por medio del getter de productos
+    return this.getProducts().pipe(
+      map(products => products.filter(product => product.category_id === category_id))
+    );
   }
 
-  getRandomSuggestedProducts(): Product[] {
-    // Get two random products
-    if(this.products.length>2){
-      const suggestedProducts: Product[] = [];
-      let randomIndex1 = Math.floor(Math.random() * this.products.length);
-      let randomIndex2;
-      do {
-        randomIndex2 = Math.floor(Math.random() * this.products.length);
-      } while(randomIndex1 === randomIndex2);
-      suggestedProducts.push(this.products[randomIndex1]);
-      suggestedProducts.push(this.products[randomIndex2]);
-      return suggestedProducts;
-    }
-    return [];
+  // Obtener dos productos aleatorios para sugerir al usuario
+
+  getRandomSuggestedProducts(): Observable<Product[]> {
+    return this.getProducts().pipe(
+      map(products => {
+        if (products.length > 2) {
+          const suggestedProducts: Product[] = [];
+          let randomIndex1 = Math.floor(Math.random() * products.length);
+          let randomIndex2;
+          do {
+            randomIndex2 = Math.floor(Math.random() * products.length);
+          } while (randomIndex1 === randomIndex2);
+          suggestedProducts.push(products[randomIndex1]);
+          suggestedProducts.push(products[randomIndex2]);
+          return suggestedProducts;
+        }
+        return [];
+      })
+    );
   }
 
-  getSuggestedProductsByCategory(product_id: number, category_id: number): Product[] {
 
-    // Get two random products from the same category and is not current product
 
-    const suggestedProducts: Product[] = [];
-    let productsByCategory = this.getProductsByCategory(category_id).filter(product => product.id !== product_id);
-    if(productsByCategory.length > 0){
-      let randomIndex1 = Math.floor(Math.random() * productsByCategory.length);
-      let randomIndex2;
-      do {
-        randomIndex2 = Math.floor(Math.random() * productsByCategory.length);
-      } while(randomIndex1 === randomIndex2);
-      suggestedProducts.push(productsByCategory[randomIndex1]);
-      suggestedProducts.push(productsByCategory[randomIndex2]);
-      return suggestedProducts;
-    }
-    return [];
+  getSuggestedProductsByCategory(product_id: number): Observable<Product[]> {
+    // Obtener 2 productos sugeridos por medio de la categoría
+    // del producto actual
+    return this.getProductById(product_id).pipe(
+      switchMap(product =>
+        this.getProductsByCategory(product.category_id).pipe(
+          // Filtrar los productos que no sean el producto actual
+          // y obtener dos productos aleatorios
+
+          map(products => products.filter(p => p.product_id !== product_id).slice(0, 2)),
+
+        )
+      )
+    );
+
   }
 
 }

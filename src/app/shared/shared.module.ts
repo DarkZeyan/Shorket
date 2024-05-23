@@ -23,20 +23,22 @@ import { TableComponentComponent } from './pages/cart-page/components/table-comp
 import { PaymentMethodComponent } from './pages/cart-page/components/payment-method/payment-method.component';
 import { WishListComponent } from './pages/wish-list/wish-list.component';
 import { PromotionsPageComponent } from './pages/promotions-page/promotions-page.component';
+import { Error404PageComponent } from './pages/404/404.component';
+import { Error403PageComponent } from './pages/403/403.component';
 
 
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent },
+  { path: 'home', component: MainPageComponent },
   { path: 'addresses', component: AddressesPageComponent },
   { path: 'cart', component: CartPageComponent },
   { path: 'categories', component: CategoryPageComponent },
-  { path: 'category/:name', component: CatalogPageComponent },
+  { path: 'category', component: CatalogPageComponent },
   { path: 'order-history', component: OrderHistoryPageComponent },
   { path: 'order/:id', component: OrderStatusPageComponent },
   { path: 'wish-list', component: WishListComponent },
   { path: 'promotions', component: PromotionsPageComponent },
-  { path: 'admin', component: AdminPageComponent }
+  { path: 'admin', component: AdminPageComponent },
 ];
 
 @NgModule({
@@ -54,7 +56,9 @@ const routes: Routes = [
     TableComponentComponent,
     PaymentMethodComponent,
     WishListComponent,
-    PromotionsPageComponent
+    PromotionsPageComponent,
+    Error403PageComponent,
+    Error404PageComponent
   ],
   imports: [
     CommonModule,

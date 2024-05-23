@@ -1,25 +1,26 @@
 <div class="justify-content-center m-5" style="min-height: 55vh;">
-  <div class="row" *ngIf="addresses.length>0">
-    <div *ngFor="let address of addresses; let index = index" class="col-sm-4 mb-3">
+  <div class="row" *ngIf="addresses">
+    <div *ngFor="let address of addresses | async; let index = index" class="col-sm-4 mb-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Dirección No.{{index+1}}</h5>
-          <p class="card-text">Direccion: {{address.address_line1}}</p>
-          <p *ngIf="address.address_line2" class="card-text">Direccion Linea 2: {{address.address_line2}}</p>
-          <p class="card-text">{{address.city}}, {{address.state}}. {{ address.country }}</p>
-          <p class="card-text">Codigo postal: {{address.postal_code}}</p>
-          <p class="card-text">Telefono: {{address.phone_number}}</p>
+          <h5 class="card-title"> <span class="bi bi-house-fill"></span>  Dirección No.{{index+1}}</h5>
+          <p class="card-text"> <span class="bi bi-person-fill"></span> Nombre completo: {{address.name}}</p>
+          <p class="card-text"> <span class="bi bi-house-door-fill"></span> Direccion: {{address.address_line_1}}</p>
+          <p *ngIf="address.address_line_2" class="card-text"> <span class="bi bi-house-door-fill"></span> Direccion Linea 2: {{address.address_line_2}}</p>
+          <p class="card-text"> <span class="bi bi-geo-alt-fill"></span> {{address.city}}, {{address.state}}. {{ address.country }}</p>
+          <p class="card-text"> <span class="bi bi-mailbox2"></span> Codigo postal: {{address.postal_code}}</p>
+          <p class="card-text"> <span class="bi bi-phone-fill"></span> Telefono: {{address.phone_number}}</p>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="addresses.length===0" class="container-fluid">
+  <div *ngIf="(addresses |async)?.length===0" class="container-fluid">
     <div class="alert alert-info" role="alert">
       No tienes direcciones registradas
     </div>
   </div>
   <div class="text-end">
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">Agregar nueva direccion</button>
+    <button class="btn btn-primary" (click)="modal.show()" data-bs-target="#addAddressModal">Agregar nueva direccion</button>
   </div>
 </div>
 
@@ -34,12 +35,16 @@
       <div class="modal-body">
         <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label class="form-label" for="address_line1">Direccion Linea 1</label>
-            <input class="form-control" type="text" id="address_line1" formControlName="address_line1">
+            <label class="form-label" for="name">Nombre completo</label>
+            <input class="form-control" type="text" id="name" formControlName="name">
           </div>
           <div class="form-group">
-            <label class="form-label" for="address_line2">Direccion Linea 2</label>
-            <input class="form-control" type="text" id="address_line1" formControlName="address_line2">
+            <label class="form-label" for="address_line_1">Direccion Linea 1</label>
+            <input class="form-control" type="text" id="address_line_1" formControlName="address_line_1">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="address_line_2">Direccion Linea 2</label>
+            <input class="form-control" type="text" id="address_line_2" formControlName="address_line_2">
           </div>
           <div class="form-group">
             <label class="form-label" for="city">Ciudad</label>

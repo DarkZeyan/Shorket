@@ -2,20 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '@products/interfaces/product.interface';
 import { ProductService } from '../../services/product.service';
-import { Review } from '@products/interfaces/product-review.interface';
+import { ProductReview } from '@products/interfaces/product-review.interface';
+import { Observable, filter } from 'rxjs';
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss'],
 })
-export class ProductPageComponent  implements OnInit {
+export class ProductPageComponent implements OnInit {
 
 
-  product!: Product;
-
-  reviews: Review[] = [];
-  suggestedProducts: Product[] = [];
-
+  product!: Observable<Product>;
+  suggestedProducts!: Observable<Product[]>;
+  productReviews!: Observable<ProductReview[]>;
   constructor(private route: ActivatedRoute, private ProductService: ProductService, private router: Router) {
 
   }
@@ -27,20 +26,22 @@ export class ProductPageComponent  implements OnInit {
     this.route.queryParams.subscribe(params => {
       const product_id = +params['product_id'];
       this.product = this.getProductById(product_id);
-      this.reviews = this.getReviewsByProductId(this.product.id);
-      this.suggestedProducts = this.getSuggestedProducts(this.product.id, this.product.category_id);
+      this.product.subscribe(product => {
+        this.productReviews = this.ProductService.getReviewsByProductId(product.product_id).pipe(
+          filter(review => review !== null)
+        );
+        this.suggestedProducts = this.getSuggestedProducts(product.product_id, product.category_id);
+      });
     });
-
   }
-  getProductById(product_id: number){
+  getProductById(product_id: number) {
     return this.ProductService.getProductById(product_id);
   }
-  getReviewsByProductId(product_id: number): Review[] {
-    return this.ProductService.getReviewsByProductId(product_id);
-  }
 
-  getSuggestedProducts(product_id: number, category_id: number): Product[] {
-    return this.ProductService.getSuggestedProductsByCategory(product_id ,category_id);
+
+
+  getSuggestedProducts(product_id: number, category_id: number): Observable<Product[]> {
+    return this.ProductService.getSuggestedProductsByCategory(product_id);
   }
 
 }

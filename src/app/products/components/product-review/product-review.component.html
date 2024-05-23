@@ -6,7 +6,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="reviews.length === 0" class="row justify-content-center-mt-3">
+  <div *ngIf="(reviews|async)?.length === 0" class="row justify-content-center-mt-3">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let review of reviews" class="row justify-content-center mt-3  m-1">
+  <div *ngFor="let review of reviews |async" class="row justify-content-center mt-3  m-1">
     <div class="col-10 mb-3">
       <div class="card bg-primary bg-opacity-25">
         <div class="card-body">
@@ -30,7 +30,7 @@
           <p class="card-text mt-2">
             {{review.commentary}}
           </p>
-          <p class="text-right font-weight-bold">{{getUserNameById(review.user_id)}}</p>
+          <p class="text-right font-weight-bold">{{review.customer_name}}</p>
         </div>
       </div>
     </div>

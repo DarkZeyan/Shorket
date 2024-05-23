@@ -13,9 +13,9 @@
       <div class="col-md-3">
         <div class="card bg-transparent">
           <div class="card-body">
-            <img [src]="getMostExpensiveProductByOrderDetail(order.id).image" alt=""
+            <img [src]="(getMostExpensiveProductByOrderDetail((order|async)!.order_id)|async)?.image" alt=""
               class="primary-product card-img-top mx-auto d-block">
-            <h4 class="card-title mt-3 text-center"> <strong>{{getMostExpensiveProductByOrderDetail(order.id).name | uppercase}}</strong> </h4>
+            <h4 class="card-title mt-3 text-center"> <strong>{{(getMostExpensiveProductByOrderDetail((order|async)!.order_id)|async)?.name | uppercase}}</strong> </h4>
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
         <div class="row">
           <div class="col p-5">
             <div class="card bg-opacity-50 order-status-card"
-              [ngClass]="{'bg-primary': order.status !== 'Pending', 'bg-success': order.status === 'Pending'}">
+              [ngClass]="{'bg-primary': (order|async)?.status !== 'Pending', 'bg-success': (order|async)?.status === 'Pending'}">
               <div class="card-body align-items-center d-flex justify-content-center">
                 <h2 class="card-title text-center">
                   Almacen
@@ -33,7 +33,7 @@
           </div>
           <div class="col p-5">
             <div class="card bg-opacity-50 order-status-card"
-            [ngClass]="{'bg-primary': order.status !== 'Sent', 'bg-success': order.status === 'Sent'}">
+            [ngClass]="{'bg-primary': (order|async)?.status !== 'Sent', 'bg-success': (order|async)?.status === 'Sent'}">
               <div class="card-body align-items-center d-flex justify-content-center">
                 <h2 class="card-title text-center">
                   Enviado
@@ -43,7 +43,7 @@
           </div>
           <div class="col p-5">
             <div class="card bg-opacity-50 order-status-card"
-            [ngClass]="{'bg-primary': order.status !== 'Completed', 'bg-success': order.status === 'Completed'}">
+            [ngClass]="{'bg-primary': (order|async)?.status !== 'Completed', 'bg-success': (order|async)?.status === 'Completed'}">
               <div class="card-body align-items-center d-flex justify-content-center">
                 <h2 class="card-title text-center">
                   Entregado
@@ -55,9 +55,9 @@
         <div class="row">
           <div class="bg-primary bg-opacity-75 delivery-date-label">
             <h1 class="text-light">
-              <span *ngIf="order.delivery_date === ''">Sin fecha de entrega estimada</span>
-              <span *ngIf="order.delivery_date !== '' ">Fecha de entrega estimada: {{  order.delivery_date| date: "dd/MM/yyyy"}}</span>
-                <!-- {order.delivery_date | date: "dd/MM/yyyy"} -->
+              <span *ngIf="(order|async)?.delivery_date === ''">Sin fecha de entrega estimada</span>
+              <span *ngIf="(order|async)?.delivery_date !== '' ">Fecha de entrega estimada: {{  (order|async)?.delivery_date| date: "dd/MM/yyyy"}}</span>
+                <!-- {(order|async)?.delivery_date | date: "dd/MM/yyyy"} -->
             </h1>
           </div>
         </div>
@@ -78,15 +78,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let detail of orderDetails;">
+        <tr *ngFor="let detail of orderDetails | async;">
           <td>
-          <a [routerLink]="['/category', getProductByOrderDetail(detail).category_id ,'products']" [queryParams]="{product_id: getProductByOrderDetail(detail).id}">
-            {{ getProductByOrderDetail(detail).name}}</a>
+          <a [routerLink]="['/category', (getProductByOrderDetail(detail)|async)?.category_id ,'products']" [queryParams]="{product_id: (getProductByOrderDetail(detail)|async)?.product_id}">
+            {{ (getProductByOrderDetail(detail)|async)?.name}}</a>
           </td>
           <td>{{ detail.quantity }}</td>
-          <td>{{ getProductByOrderDetail(detail).price | currency}}</td>
+          <td>{{ (getProductByOrderDetail(detail)|async)?.price | currency}}</td>
           <td *ngIf="detail.subtotal">{{detail.subtotal | currency }}</td>
-          <td *ngIf="!detail.subtotal || detail.subtotal === 0" >{{ getProductByOrderDetail(detail).price * detail.quantity | currency }}</td>
         </tr>
       </tbody>
     </table>

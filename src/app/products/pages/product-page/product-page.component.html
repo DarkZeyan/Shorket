@@ -2,23 +2,24 @@
   <div class="row">
     <!-- Seccion para la imagen del producto -->
     <div class="col-md-6 text-center">
-      <img [src]="product.image" [alt]="product.description" class="product-img">
+      <img [src]="(product|async)?.image ? 'data:image/png;base64,'+(product|async)?.image
+      : 'assets/product-imgs/image-not-available.png'" [alt]="(product|async)?.description" class="product-img">
     </div>
     <!-- Seccion de detalles del producto -->
     <div class="col-md-6 product-details">
       <h2 class="mb-3">
-        {{product.name | uppercase}}
+        {{(product|async)?.name | uppercase}}
 
       </h2>
       <h4 class="product-price mt-3 mb-3">
-        {{product.price | currency}}
+        {{(product|async)?.price | currency}}
       </h4>
       <h6 class="product-shipping-cost mt-3">
         Costo de envio: {{ 270 | currency}}
       </h6>
       <div class="mt-5 description-container">
         <h3 class="mt-3">Descripcion:</h3>
-        <p class="mt-3">{{product.description}}</p>
+        <p class="mt-3">{{(product|async)?.description}}</p>
       </div>
       <div class="ml-5 col-md-3 product-actions">
         <div class="row m-3">
@@ -38,6 +39,11 @@
             Agregar al carrito <span class="bi bi-cart-fill"></span>
           </button>
         </div>
+        <div class="row m-3">
+          <button class="btn btn-info text-light">
+            Añadir a lista de deseados <span class="bi bi-star-fill"></span>
+          </button>
+        </div>
         <div class="row m-3 p-2">
           <div class="card text-center bg-dark promo-card">
             <div class="card-body">
@@ -54,7 +60,7 @@
 </div>
 <div class="row m-3 justify-content-center">
   <div class="col-md-4">
-    <product-reviews [reviews]="reviews"></product-reviews>
+    <product-reviews [reviews]="(productReviews)"></product-reviews>
   </div>
   <div class="col-md-4">
     <suggested-products [suggestedProducts]="suggestedProducts"></suggested-products>
