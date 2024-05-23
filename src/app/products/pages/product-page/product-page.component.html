@@ -40,7 +40,7 @@
           </button>
         </div>
         <div class="row m-3">
-          <button class="btn btn-info text-light">
+          <button (click)="addToWishList(wishList, productRef)" class="btn btn-info text-light">
             Añadir a lista de deseados <span class="bi bi-star-fill"></span>
           </button>
         </div>
@@ -75,5 +75,16 @@
     <div class="toast-body">
       El producto se ha añadido al carrito
     </div>
+  </div>
+</div>
+
+<div class="toast-container position-absolute top-50 start-50 translate-middle">
+  <div class="toast" id="wishingToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Product deseado</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      El producto se ha añadido a la lista de favoritos
   </div>
 </div>
