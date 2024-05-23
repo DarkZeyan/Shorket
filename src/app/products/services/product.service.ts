@@ -89,7 +89,11 @@ export class ProductService {
     return this.getProductById(product_id).pipe(
       switchMap(product =>
         this.getProductsByCategory(product.category_id).pipe(
-          map(products => products.filter(p => p.product_id !== product_id))
+          // Filtrar los productos que no sean el producto actual
+          // y obtener dos productos aleatorios
+
+          map(products => products.filter(p => p.product_id !== product_id).slice(0, 2)),
+
         )
       )
     );

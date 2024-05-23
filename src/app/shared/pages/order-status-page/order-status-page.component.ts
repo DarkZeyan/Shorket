@@ -12,8 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class OrderStatusPageComponent implements OnInit {
 
-  order!: Order;
-  orderDetails: OrderDetail[] = [];
+  order: Observable<Order> = new Observable<Order>();
+  statusLabel: string = '';
+  orderDetails: Observable<OrderDetail[]> = new Observable<OrderDetail[]>();
 
   constructor(private route: ActivatedRoute, private router: Router, private orderService: OrdersService, private productService: ProductService) { }
 
@@ -23,13 +24,16 @@ export class OrderStatusPageComponent implements OnInit {
 
       const orderId = +params['id'];
       this.getOrderByOrderId(orderId);
+      this.order.subscribe(order => {
+        this.statusLabel = order.status;
+      });
       this.getOrderDetailsByOrderId(orderId);
 
     });
   }
 
   getOrderStatusLabelTranslated() {
-    switch (this.order.status) {
+    switch (this.statusLabel) {
       case 'Completed':
         return 'Pedido completado';
       case 'Pending':
@@ -42,12 +46,13 @@ export class OrderStatusPageComponent implements OnInit {
   }
 
   getOrderDetailsByOrderId(orderId: number): void {
-    this.orderDetails = this.orderService.getDetailsByOrderId(orderId);
+    this.orderDetails = this.orderService.getOrderDetailsByOrderId(orderId);
   }
 
   getOrderByOrderId(orderId: number): void {
-    this.order = this.orderService.getOrderById(orderId);
+    this.order = this.orderService.getOrderByOrderId(orderId);
   }
+
 
   getProductById(productId: number): Observable<Product> {
     return this.productService.getProductById(productId);

@@ -1,49 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Order } from '@shared/intefaces/order.interface';
 import { OrdersService } from '../../services/orders.service';
+import { Observable, Subscription } from 'rxjs';
+import { UsersService } from '../../../users/services/users.service';
 
 @Component({
   selector: 'app-order-history-page',
   templateUrl: './order-history-page.component.html',
   styleUrl: './order-history-page.component.css'
 })
-export class OrderHistoryPageComponent {
+export class OrderHistoryPageComponent implements OnInit, OnDestroy {
 
 
 
-  orders: Order[] = [
-    {
-      order_id: 1,
-      status: 'Delivered',
-      total: 1000,
-      order_date: '2021-01-01',
-      delivery_date: '2021-01-05'
-    },
-    {
-      order_id: 2,
-      status: 'Delivered',
-      total: 2000,
-      order_date: '2021-02-01',
-      delivery_date: '2021-02-05'
-    },
-    {
-      order_id: 3,
-      status: 'Delivered',
-      total: 3000,
-      order_date: '2021-03-01',
-      delivery_date: '2021-03-05'
-    }
-  ];
+  orders: Observable<Order[]> = new Observable<Order[]>();
+  ordersLength: number = 0;
+  private orderSubscription: Subscription = new Subscription;
 
-  constructor(private orderService: OrdersService) { }
+
+  constructor(private orderService: OrdersService, private userService: UsersService) { }
 
   ngOnInit(): void {
-    this.orders = this.getOrders();
+    const user = this.userService.getUserFromCookies();
+    if (!user) {
+      return;
+    }
+    this.orders = this.getOrderByUser(user.user_id);
+    this.orderSubscription = this.orders.subscribe(orders => {
+      this.ordersLength = orders.length;
+    })
   }
 
-  getOrders(): Order[] {
-    return this.orderService.getOrders();
+  getOrderByUser(user_id: number): Observable<Order[]> {
+    return this.orderService.getOrdersFromUser(user_id);
   }
 
+  ngOnDestroy(): void {
+    this.orderSubscription.unsubscribe();
+  }
 
 }
