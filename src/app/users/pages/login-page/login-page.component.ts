@@ -62,9 +62,12 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
         (user: User | null) => {
           // Handle successful login
           if (user) {
-            console.log(user);
             this.loginForm.reset();
-            this.router.navigate(['/home']);
+            setInterval(() => {
+              this.router.navigate(['/home']).then(() => {
+                window.location.reload();
+              });
+            }, 500);
           }
           else {
             console.log('Login failed');
@@ -106,12 +109,11 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
       // Call the create user service
       this.usersService.createUser(user).subscribe(
         (createdUser: User) => {
-          console.log(createdUser);
-
+          console.log(createdUser)
           // After creating the user, log the user in
           this.usersService.getUserByEmailPassword(createdUser.email, createdUser.password).subscribe(
             (loggedInUser: User | null) => {
-              // Handle successful login
+              console.log(loggedInUser)
               if (loggedInUser) {
 
                 // Call the register service
@@ -122,8 +124,12 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
                 this.registerSuccess = true;
                 setInterval(() => {
                   this.registerSuccess = false;
+                  this.router.navigate(['/home']).then(() => {
+                    window.location.reload();
+                  }
+                  );
                 }, 5000);
-                this.router.navigate(['/home']);
+
               }
               else {
                 console.log('Login failed');
