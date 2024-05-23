@@ -24,12 +24,11 @@ export class UsersService {
       return of(this.user);
     }
 
-    return this.httpClient.get<User>(`${this.API_URL}/user/email=${email}/password=${password}`).pipe(
+    return this.httpClient.get<User>(`${this.API_URL}/user/${email}/${password}`).pipe(
       tap(user => {
         if (user) {
           this.isUserLoaded = true;
           this.setUser(user);
-          console.log(user);
         } else {
           this.isUserLoaded = false;
         }
@@ -60,6 +59,7 @@ export class UsersService {
 
   setUser(user: User): void {
     this.user = user;
+
     this.saveUserInCookies(user);
   }
 
