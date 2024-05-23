@@ -54,15 +54,15 @@ export class OrderStatusPageComponent implements OnInit {
   }
 
 
-  getProductById(productId: number): Observable<Product> {
+  getProductById(productId: number): Observable<Product | null> {
     return this.productService.getProductById(productId);
   }
 
-  getProductByOrderDetail(orderDetail: OrderDetail): Observable<Product> {
+  getProductByOrderDetail(orderDetail: OrderDetail): Observable<Product | null> {
     return this.getProductById(orderDetail.product_id);
   }
 
-  getMostExpensiveProductByOrderDetail(order_id: number): Observable<Product> {
+  getMostExpensiveProductByOrderDetail(order_id: number): Observable<Product | null> {
     const detail = this.orderService.getDetailWithMostExpensiveProduct(order_id);
     return this.getProductById(detail.product_id);
   }

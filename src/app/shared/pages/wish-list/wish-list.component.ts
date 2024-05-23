@@ -4,7 +4,9 @@ import { ProductService } from '../../../products/services/product.service';
 import { WishListService } from '../../services/wishlist.service';
 import { Product } from '@products/interfaces/product.interface';
 import { CartService } from '../cart-page/services/cart.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { UsersService } from '../../../users/services/users.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-wish-list',
   templateUrl: './wish-list.component.html',
@@ -12,39 +14,49 @@ import { Observable } from 'rxjs';
 })
 export class WishListComponent implements OnInit {
 
-  WishList: WishList = {
-    list_id: 1,
-    user_id: 1,
-  };
-  WishListDetails: WishListDetail[] = [
-    {
-      detail_id: 1,
-      list_id: 1,
-      product_id: 1
-    },
-    {
-      detail_id: 1,
-      list_id: 1,
-      product_id: 1
-    },
-    {
-      detail_id: 1,
-      list_id: 1,
-      product_id: 1
+  WishList: WishList | null = null;
+
+  wishListDetails: Observable<WishListDetail[]> = new Observable<WishListDetail[]>();
+  wishListLength: number = 0;
+
+
+  constructor(private productService: ProductService, private wishlistService: WishListService,
+    private router: Router,
+    private cartService: CartService, private usersService: UsersService) { }
+  ngOnInit() {
+
+    const user = this.usersService.getUserFromCookies();
+
+    if (user === null) {
+      this.router.navigate(['/403']);
+      return;
+    } else {
+      this.getWishListByUserId(user.user_id).subscribe(wishList => {
+        this.WishList = wishList;
+        if (wishList !== null) {
+          this.getWishListDetailsByWishListId(wishList.list_id).subscribe(
+            wishListDetails => {
+              this.wishListDetails = of(wishListDetails);
+              this.wishListLength = wishListDetails.length;
+            }
+          )
+        } else {
+          this.wishlistService.createWishList(user.user_id).subscribe(wishList => {
+            this.WishList = wishList;
+          });
+        }
+      });
     }
-  ];
+
+  }
 
 
-  constructor(private productService: ProductService, private wishlistService: WishListService, private cartService: CartService) { }
-  ngOnInit() { }
-
-
-  getProductById(productId: number): Observable<Product> {
+  getProductById(productId: number): Observable<Product | null> {
     return this.productService.getProductById(productId);
   }
 
   getWishListDetailsByWishListId(list_id: number) {
-    return this.wishlistService.getWishListDetailsByWishListId(list_id);
+    return this.wishlistService.getWishListDetailsByListId(list_id);
   }
 
   getWishListByUserId(user_id: number) {

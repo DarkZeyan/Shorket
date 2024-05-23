@@ -5,11 +5,11 @@
   <!--
     Si no hay wishlist, mostrar un mensaje de que no hay productos en la lista de deseos
   -->
-  <div class="alert alert-info" *ngIf="WishListDetails.length==0">
+  <div class="alert alert-info" *ngIf="wishListLength==0">
     <h4 class="text-center">No hay productos en la lista de deseos</h4>
   </div>
-  <div class="row m-3" *ngIf="WishListDetails.length>0">
-    <div *ngFor="let wishListDetail of WishListDetails;" class="col-sm-4 mb-3">
+  <div class="row m-3" *ngIf="wishListLength>0">
+    <div *ngFor="let wishListDetail of wishListDetails | async;" class="col-sm-4 mb-3">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title text-center"> <span class="bi bi-heart-fill"></span>

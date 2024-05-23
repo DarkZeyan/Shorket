@@ -12,7 +12,7 @@ export class CartPageComponent implements OnInit {
 
 
 
-  constructor(private cartService:CartService) {};
+  constructor(private cartService: CartService) { };
 
   ngOnInit() {
     this.cartItems = this.cartService.cartItems;
