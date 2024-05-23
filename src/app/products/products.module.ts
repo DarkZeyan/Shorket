@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { ProductReviewComponent } from './components/product-review/product-review.component';
 import { SuggestedProductsComponent } from './components/suggested-products/suggested-products.component';
+import { FormsModule } from '@angular/forms';
 
 const routes = [
   { path: 'products', component: ProductPageComponent }
@@ -17,6 +18,7 @@ const routes = [
   declarations: [ProductPageComponent, ProductReviewComponent, SuggestedProductsComponent],
   imports: [
     CommonModule,
+    FormsModule,
     BrowserModule,
     RouterModule.forChild(routes)
   ],

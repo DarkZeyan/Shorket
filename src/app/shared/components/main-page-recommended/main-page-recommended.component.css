@@ -1,6 +1,7 @@
 .art-rec-img{
-  max-width:350px;
-  max-height:350px;
+  width:350px;
+  height:350px;
+  padding:2rem
 }
 a{
   text-decoration: none;
