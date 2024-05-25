@@ -23,8 +23,13 @@ export class UsersService {
     if (this.isUserLoaded) {
       return of(this.user);
     }
-
-    return this.httpClient.get<User>(`${this.API_URL}/user/${email}/${password}`).pipe(
+    console.log('Getting user from API')
+    return this.httpClient.get<User>(`${this.API_URL}/user`, {
+      params: {
+        email: email,
+        password: password
+      }
+    }).pipe(
       tap(user => {
         if (user) {
           this.isUserLoaded = true;

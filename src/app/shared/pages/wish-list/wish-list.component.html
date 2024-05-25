@@ -21,14 +21,11 @@
           <p class="card-text"> <span class="bi bi-cash"></span> Precio: {{ product.product?.price| currency }}</p>
           <!-- Botones para agregar al carrito y eliminarlo de la wishlist  -->
           <div class="d-flex">
-            <button class="btn btn-primary mx-auto">Agregar al carrito</button>
+            <button (click)="addToCart(product.product!, product.detail.detail_id)" class="btn btn-primary mx-auto">Agregar al carrito</button>
             <button (click)="deleteDetailFromWishList(product.detail.detail_id)" class="btn btn-danger mx-auto">Eliminar de la lista de deseos</button>
           </div>
         </div>
       </div>
     </div>
-
   </div>
-
-
 </div>

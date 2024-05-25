@@ -67,7 +67,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
         const user = this.usersService.getUserFromCookies();
         if (user) {
           this.wishListService.getWishListByUserId(user.user_id).subscribe(wishList => {
-            console.log('Wishlist', wishList)
             this.wishList = wishList;
           });
         }
@@ -117,7 +116,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
 
   addToWishList(wishList: WishList, product: Product) {
-    console.log('WishList 2', wishList)
     this.wishListService.createWishListDetail(wishList.list_id, product.product_id).subscribe(() => {
       this.wishingToast.show();
       setTimeout(() => {

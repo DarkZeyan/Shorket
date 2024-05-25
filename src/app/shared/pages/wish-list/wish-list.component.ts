@@ -61,8 +61,14 @@ export class WishListComponent implements OnInit {
     }
   }
 
-  addToCart(product: Product) {
+  addToCart(product: Product, detail_id: number) {
+
     this.cartService.addToCart({ product: product, quantity: 1 });
+
+    this.router.navigate(['/cart']).then(() => {
+      window.location.reload();
+    });
+    this.deleteDetailFromWishList(detail_id)
   }
 
 
