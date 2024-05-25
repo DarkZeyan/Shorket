@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoryPageComponent },
   { path: 'category', component: CatalogPageComponent },
   { path: 'order-history', component: OrderHistoryPageComponent },
-  { path: 'order/:id', component: OrderStatusPageComponent },
+  { path: 'order', component: OrderStatusPageComponent },
   { path: 'wish-list', component: WishListComponent },
   { path: 'promotions', component: PromotionsPageComponent },
   { path: 'admin', component: AdminPageComponent },
@@ -58,8 +58,8 @@ const routes: Routes = [
     WishListComponent,
     PromotionsPageComponent,
     Error403PageComponent,
-    Error404PageComponent
-  ],
+    Error404PageComponent],
+
   imports: [
     CommonModule,
     BrowserModule,

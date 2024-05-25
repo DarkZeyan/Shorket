@@ -51,6 +51,14 @@ export class AddressService {
     );
   }
 
+  getFirstAddressByUser(user_id: number): Observable<Address> {
+    return this.httpClient.get<Address>(`${this.API_URL}/user/${user_id}/first`).pipe(
+      tap(address => {
+        return address
+      })
+    );
+  }
+
 
   // crear dirección
   createAddress(address: Address, user_id: number): Observable<Address> {
@@ -93,6 +101,8 @@ export class AddressService {
       })
     );
   }
+
+
 
 
 }

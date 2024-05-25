@@ -18,14 +18,28 @@ export class AddressesPageComponent implements AfterViewInit, OnInit {
   addresses!: Observable<Address[]>;
   user!: User;
   modal!: Modal;
+  modalUpdate!: Modal;
 
   addressForm: FormGroup;
+  updateAddress: FormGroup;
 
   constructor(private fb: FormBuilder, private addressService: AddressService, private userService: UsersService, private router: Router) {
     this.addressForm = this.fb.group({
       // Define form controls for each address field
 
 
+      name: ['', Validators.required],
+      address_line_1: ['', Validators.required],
+      address_line_2: [''],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      country: ['', Validators.required],
+      postal_code: ['', Validators.required],
+      phone_number: ['', Validators.required]
+    });
+
+    this.updateAddress = this.fb.group({
+      // Define form controls for each address field
       name: ['', Validators.required],
       address_line_1: ['', Validators.required],
       address_line_2: [''],
@@ -47,6 +61,7 @@ export class AddressesPageComponent implements AfterViewInit, OnInit {
     }
     this.user = this.userService.getUserFromCookies()!;
     this.addresses = this.addressService.getAddressesByUser(this.user.user_id);
+    console.log(this.addresses)
     console.log(this.addresses)
   }
 

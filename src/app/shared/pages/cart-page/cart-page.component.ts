@@ -5,6 +5,7 @@ import { OrdersService } from '../../services/orders.service';
 import { User } from '../../../users/interfaces/user.interface';
 import { Order, OrderBody, OrderDetail } from '@shared/intefaces/order.interface';
 import { UsersService } from '../../../users/services/users.service';
+import { AddressService } from '../../services/addresses.service';
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
@@ -16,7 +17,7 @@ export class CartPageComponent implements OnInit {
   user: User | null = null;
 
 
-  constructor(private cartService: CartService, private orderService: OrdersService, private usersService: UsersService) {
+  constructor(private cartService: CartService, private orderService: OrdersService, private addressService: AddressService, private usersService: UsersService) {
     this.user = this.usersService.getUserFromCookies();
     this.cartItems = this.cartService.cartItems;
   };
@@ -40,28 +41,38 @@ export class CartPageComponent implements OnInit {
       return;
     }
 
-    this.orderService.createOrder(orderBody).subscribe((order: Order) => {
-      console.log(user)
-      this.orderService.createOrderUserAddress(user.user_id, 1, order.order_id).subscribe((orderUserAddress) => {
-        console.log('orderUserAddress registrada', orderUserAddress);
-      });
+    this.addressService.getFirstAddressByUser(user.user_id).subscribe((address) => {
 
-      this.cartService.cartItems.forEach(cartItem => {
-        const orderDetailBody = {
-          order_id: order.order_id,
-          product_id: cartItem.product.product_id,
-          quantity: cartItem.quantity,
-          subtotal: cartItem.product.price * cartItem.quantity
-        };
-        this.orderService.createOrderDetail(orderDetailBody).subscribe((orderDetail: OrderDetail) => {
-          console.log(orderDetail);
+
+
+      this.orderService.createOrder(orderBody).subscribe((order: Order) => {
+        console.log(user)
+        this.orderService.createOrderUserAddress(user.user_id, address.address_id, order.order_id).subscribe((orderUserAddress) => {
+          console.log('orderUserAddress registrada');
+          console.log(address.address_id)
         });
-      });
+        console.log('Carrito', this.cartItems)
+        this.cartItems.forEach(cartItem => {
+          const orderDetailBody = {
+            order_id: order.order_id,
+            product_id: cartItem.product.product_id,
+            quantity: cartItem.quantity,
+            subtotal: cartItem.product.price * cartItem.quantity
+          };
+          console.log(orderDetailBody);
+          this.orderService.createOrderDetail(orderDetailBody).subscribe((orderDetail: OrderDetail) => {
+            // Se crea el detalle de la orden
+            console.log('orderDetail registrada', orderDetail);
+          });
+        });
+      }
+      )
+      this.cartService.clearCart();
     }
     );
 
 
-    this.cartService.clearCart();
+
 
   }
 

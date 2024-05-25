@@ -25,9 +25,9 @@
         <td>{{order.order_date | date: "dd/MM/yyyy"}}</td>
         <td>{{order.delivery_date | date: "dd/MM/yyyy"}}</td>
         <td>{{order.total | currency}}</td>
-        <td>{{order.status}}</td>
+        <td>{{getOrderStatusLabelTranslated(order.status)}}</td>
         <td>
-          <a [routerLink]="['/order', order.order_id]" class="btn btn-primary">Ver detalles</a>
+          <a  [href]="'/order?order_id='+order.order_id"  class="btn btn-primary">Ver detalles</a>
         </td>
       </tr>
     </tbody>

@@ -13,9 +13,9 @@
       <div class="col-md-3">
         <div class="card bg-transparent">
           <div class="card-body">
-            <img [src]="(getMostExpensiveProductByOrderDetail((order|async)!.order_id)|async)?.image" alt=""
+            <img [src]="mostExpensiveProduct ? 'data:image/png;base64,'+mostExpensiveProduct!.image : 'assets/product-imgs/image-not-available.png'" alt=""
               class="primary-product card-img-top mx-auto d-block">
-            <h4 class="card-title mt-3 text-center"> <strong>{{(getMostExpensiveProductByOrderDetail((order|async)!.order_id)|async)?.name | uppercase}}</strong> </h4>
+            <h4 class="card-title mt-3 text-center"> <strong>{{mostExpensiveProduct?.name| uppercase}}</strong> </h4>
           </div>
         </div>
       </div>
@@ -78,13 +78,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let detail of orderDetails | async;">
+        <tr *ngFor="let detail of orderDetails | async; let i = index">
           <td>
-          <a [routerLink]="['/category', (getProductByOrderDetail(detail)|async)?.category_id ,'products']" [queryParams]="{product_id: (getProductByOrderDetail(detail)|async)?.product_id}">
-            {{ (getProductByOrderDetail(detail)|async)?.name}}</a>
+          <a [routerLink]="['/products']" [queryParams]="{product_id: productsFromDetails[i].product_id}">
+            {{ productsFromDetails[i].name}}</a>
           </td>
           <td>{{ detail.quantity }}</td>
-          <td>{{ (getProductByOrderDetail(detail)|async)?.price | currency}}</td>
+          <td>{{ productsFromDetails[i].price | currency}}</td>
           <td *ngIf="detail.subtotal">{{detail.subtotal | currency }}</td>
         </tr>
       </tbody>
