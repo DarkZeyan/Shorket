@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { MainPageComponent } from './pages/main-page/main-page.component';
@@ -63,6 +63,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     MainPageModule,
     RouterModule.forChild(routes)

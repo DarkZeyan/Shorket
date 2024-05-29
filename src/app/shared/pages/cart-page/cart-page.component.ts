@@ -6,6 +6,8 @@ import { User } from '../../../users/interfaces/user.interface';
 import { Order, OrderBody, OrderDetail } from '@shared/intefaces/order.interface';
 import { UsersService } from '../../../users/services/users.service';
 import { AddressService } from '../../services/addresses.service';
+import { Observable } from 'rxjs';
+import { Address } from '@shared/intefaces/address.interface';
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
@@ -15,6 +17,9 @@ export class CartPageComponent implements OnInit {
 
   cartItems: CartItem[] = [];
   user: User | null = null;
+  addresses!: Observable<Address[]>;
+  addressesLength: number = 0;
+  selectedAddressID: number = 0;
 
 
   constructor(private cartService: CartService, private orderService: OrdersService, private addressService: AddressService, private usersService: UsersService) {
@@ -24,7 +29,7 @@ export class CartPageComponent implements OnInit {
 
 
   // Convert cart items to an order
-  createOrder(): void {
+  createOrder(address_id: number): void {
     console.log('Creating order')
     const deliveryDate = new Date();
     deliveryDate.setDate(deliveryDate.getDate() + 7);
@@ -41,36 +46,33 @@ export class CartPageComponent implements OnInit {
       return;
     }
 
-    this.addressService.getFirstAddressByUser(user.user_id).subscribe((address) => {
 
 
 
-      this.orderService.createOrder(orderBody).subscribe((order: Order) => {
-        console.log(user)
-        this.orderService.createOrderUserAddress(user.user_id, address.address_id, order.order_id).subscribe((orderUserAddress) => {
-          console.log('orderUserAddress registrada');
-          console.log(address.address_id)
+
+    this.orderService.createOrder(orderBody).subscribe((order: Order) => {
+      console.log(user)
+      this.orderService.createOrderUserAddress(user.user_id, address_id, order.order_id).subscribe((orderUserAddress) => {
+        console.log('orderUserAddress registrada');
+        console.log(address_id)
+      });
+      console.log('Carrito', this.cartItems)
+      this.cartItems.forEach(cartItem => {
+        const orderDetailBody = {
+          order_id: order.order_id,
+          product_id: cartItem.product.product_id,
+          quantity: cartItem.quantity,
+          subtotal: cartItem.product.price * cartItem.quantity
+        };
+        console.log(orderDetailBody);
+        this.orderService.createOrderDetail(orderDetailBody).subscribe((orderDetail: OrderDetail) => {
+          // Se crea el detalle de la orden
+          console.log('orderDetail registrada', orderDetail);
         });
-        console.log('Carrito', this.cartItems)
-        this.cartItems.forEach(cartItem => {
-          const orderDetailBody = {
-            order_id: order.order_id,
-            product_id: cartItem.product.product_id,
-            quantity: cartItem.quantity,
-            subtotal: cartItem.product.price * cartItem.quantity
-          };
-          console.log(orderDetailBody);
-          this.orderService.createOrderDetail(orderDetailBody).subscribe((orderDetail: OrderDetail) => {
-            // Se crea el detalle de la orden
-            console.log('orderDetail registrada', orderDetail);
-          });
-        });
-      }
-      )
-      this.cartService.clearCart();
+      });
     }
-    );
-
+    )
+    this.cartService.clearCart();
 
 
 
@@ -81,6 +83,11 @@ export class CartPageComponent implements OnInit {
   ngOnInit(): void {
     this.cartService.getCart()
     this.cartItems = this.cartService.cartItems;
+    this.addresses = this.addressService.getAddressesByUser(this.user!.user_id);
+    this.addresses.subscribe((addresses) => {
+      this.addressesLength = addresses.length;
+      console.log(this.addressesLength)
+    });
   }
 
 
