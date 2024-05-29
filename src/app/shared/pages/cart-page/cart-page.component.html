@@ -28,7 +28,7 @@
   </div>
 </div>
 
-<div *ngIf="user && addressesLength >0" class="container m-3 row">
+<div *ngIf="user && addressesLength >0 && cartItems.length>0" class="container m-3 row">
   <div class="row m-5">
     <div class="col-6">
       <div class="container">
@@ -48,7 +48,7 @@
 </div>
 
 
-<div *ngIf="user && addressesLength===0" class="container m-3 row">
+<div *ngIf="user && addressesLength===0 && cartItems.length>0" class="container m-3 row">
   <div class="row m-5">
     <div class="col-6">
       <div class="container">
