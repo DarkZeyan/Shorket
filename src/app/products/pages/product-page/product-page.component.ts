@@ -25,6 +25,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   quantity: number = 1;
   productRef!: Product;
   wishList!: WishList;
+  deliveryDateLabel: string = '';
+  deliveryDate = new Date();
   @ViewChild('cartToast')
   cartToast!: Toast;
 
@@ -35,7 +37,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     private wishListService: WishListService,
     private usersService: UsersService,
     private CartService: CartService) {
-
+    this.deliveryDate.setDate(this.deliveryDate.getDate() + 7);
+    this.deliveryDateLabel = this.deliveryDate.toISOString();
   }
 
 
