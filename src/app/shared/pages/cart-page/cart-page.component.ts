@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CartItem } from '@shared/intefaces/cart.interface';
 import { CartService } from './services/cart.service';
 import { OrdersService } from '../../services/orders.service';
@@ -8,13 +8,17 @@ import { UsersService } from '../../../users/services/users.service';
 import { AddressService } from '../../services/addresses.service';
 import { Observable } from 'rxjs';
 import { Address } from '@shared/intefaces/address.interface';
+import { Toast } from 'bootstrap';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
   styleUrl: './cart-page.component.css'
 })
-export class CartPageComponent implements OnInit {
 
+export class CartPageComponent implements OnInit, AfterViewInit {
+
+  successFullOrder!: Toast;
   cartItems: CartItem[] = [];
   user: User | null = null;
   addresses!: Observable<Address[]>;
@@ -22,7 +26,7 @@ export class CartPageComponent implements OnInit {
   selectedAddressID: number = 0;
 
 
-  constructor(private cartService: CartService, private orderService: OrdersService, private addressService: AddressService, private usersService: UsersService) {
+  constructor(private cartService: CartService, private router: Router, private orderService: OrdersService, private addressService: AddressService, private usersService: UsersService) {
     this.user = this.usersService.getUserFromCookies();
     this.cartItems = this.cartService.cartItems;
   };
@@ -70,12 +74,15 @@ export class CartPageComponent implements OnInit {
           console.log('orderDetail registrada', orderDetail);
         });
       });
-    }
-    )
-    this.cartService.clearCart();
-
-
-
+      this.successFullOrder.show();
+      setTimeout(() => {
+        this.successFullOrder.hide();
+        this.cartService.clearCart();
+        this.router.navigate(['/order'], { queryParams: { order_id: order.order_id } }).then(() => {
+          window.location.reload();
+        });
+      }, 4500);
+    });
   }
 
 
@@ -90,5 +97,8 @@ export class CartPageComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    this.successFullOrder = new Toast(document.getElementById('successToast')!);
+  }
 
 }

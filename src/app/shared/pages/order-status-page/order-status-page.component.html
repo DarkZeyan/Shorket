@@ -13,7 +13,7 @@
       <div class="col-md-3">
         <div class="card bg-transparent">
           <div class="card-body">
-            <img [src]="mostExpensiveProduct ? 'data:image/png;base64,'+mostExpensiveProduct!.image : 'assets/product-imgs/image-not-available.png'" alt=""
+            <img [src]="mostExpensiveProduct!.image ? 'data:image/png;base64,'+mostExpensiveProduct!.image : 'assets/product-imgs/image-not-available.png'" alt=""
               class="primary-product card-img-top mx-auto d-block">
             <h4 class="card-title mt-3 text-center"> <strong>{{mostExpensiveProduct?.name| uppercase}}</strong> </h4>
           </div>
