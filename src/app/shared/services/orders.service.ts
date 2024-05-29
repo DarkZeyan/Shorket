@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Address } from '@shared/intefaces/address.interface';
 import { Order, OrderBody, OrderDetail, OrderDetailBody } from '@shared/intefaces/order.interface';
 import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 
@@ -108,6 +109,9 @@ export class OrdersService {
   }
 
 
+  getOrderAddressIDByOrderId(order_id: number): Observable<{ address_id: number }> {
+    return this.httpClient.get<{ address_id: number }>(`${this.API_URL}/${order_id}/address`);
+  }
 
 
 }

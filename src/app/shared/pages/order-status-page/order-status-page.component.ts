@@ -5,6 +5,8 @@ import { OrdersService } from '../../services/orders.service';
 import { Product } from '@products/interfaces/product.interface';
 import { ProductService } from '../../../products/services/product.service';
 import { Observable, forkJoin, of, switchMap } from 'rxjs';
+import { Address } from '@shared/intefaces/address.interface';
+import { AddressService } from '../../services/addresses.service';
 @Component({
   selector: 'app-order-status-page',
   templateUrl: './order-status-page.component.html',
@@ -15,10 +17,11 @@ export class OrderStatusPageComponent implements OnInit {
   order: Observable<Order> = new Observable<Order>();
   globalOrderID: number = 0;
   statusLabel: string = '';
+  orderAddress: Address | null = null;
   orderDetails: Observable<OrderDetail[]> = new Observable<OrderDetail[]>();
   productsFromDetails: Product[] = [];
   mostExpensiveProduct: Product | null = null;
-  constructor(private route: ActivatedRoute, private router: Router, private orderService: OrdersService, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private addressService: AddressService, private router: Router, private orderService: OrdersService, private productService: ProductService) { }
 
   ngOnInit(): void {
     // Extract order ID from the URL
@@ -50,7 +53,7 @@ export class OrderStatusPageComponent implements OnInit {
           });
         });
 
-
+        this.getAddressByOrderId(orderId);
 
 
       });
@@ -92,6 +95,15 @@ export class OrderStatusPageComponent implements OnInit {
   }
 
 
+  getAddressByOrderId(orderId: number): void {
+    this.orderService.getOrderAddressIDByOrderId(orderId).subscribe(odAddress => {
+      const address_id = odAddress.address_id;
+      const orderAddress = this.addressService.getAddressById(address_id);
+      orderAddress.subscribe(address => {
+        this.orderAddress = address;
+      });
+    });
+  }
 
 
 }
