@@ -3,7 +3,22 @@
   <div class="col-8">
     <cart-table-component [cartItems]="cartItems"></cart-table-component>
   </div>
-  <div class="col-4">
+
+  <div class="col-4" *ngIf="user==null">
+    <div class=" container mt-5 justify-content-center">
+      <div class="row">
+
+        <h4 class="text-center">
+          Por favor, inicia sesión para proceder al pago
+        </h4>
+      </div>
+      <div class="row ">
+        <a [routerLink]="['/login']" class="btn btn-warning mt-3">Iniciar sesión</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4" *ngIf="user" >
     <payment-method></payment-method>
     <div class="container justify-content-center d-flex">
       <button (click)="createOrder()" class="btn btn-warning mt-3">Proceder al pago</button>
