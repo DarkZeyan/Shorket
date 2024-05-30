@@ -14,7 +14,7 @@ export class CategoryService {
 
   getCategories(): Observable<Category[]> {
     if (!this.categoriesLoaded) {
-      return this.httpClient.get<Category[]>('http://localhost:8000/categories').pipe(
+      return this.httpClient.get<Category[]>('https://f5bzmcmfqw.us-east-2.awsapprunner.com/categories').pipe(
         tap(categories => {
           this.categories.next(categories);
           this.categoriesLoaded = true;
@@ -41,7 +41,7 @@ export class CategoryService {
   }
 
   addCategory(name: string): Observable<Category> {
-    return this.httpClient.post<Category>('http://localhost:8000/categories', { name: name }).pipe(
+    return this.httpClient.post<Category>('https://f5bzmcmfqw.us-east-2.awsapprunner.com/categories', { name: name }).pipe(
       tap(category => {
         this.categories.next([...this.categories.getValue(), category]);
       })
@@ -49,7 +49,7 @@ export class CategoryService {
   }
 
   deleteCategory(id: number): Observable<Category> {
-    return this.httpClient.delete<Category>(`http://localhost:8000/categories/${id}`).pipe(
+    return this.httpClient.delete<Category>(`https://f5bzmcmfqw.us-east-2.awsapprunner.com/categories/${id}`).pipe(
       tap(() => {
         this.categories.next(this.categories.getValue().filter(category => category.category_id !== id));
       })
