@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { MainPageComponent } from './pages/main-page/main-page.component';
@@ -25,6 +25,7 @@ import { WishListComponent } from './pages/wish-list/wish-list.component';
 import { PromotionsPageComponent } from './pages/promotions-page/promotions-page.component';
 import { Error404PageComponent } from './pages/404/404.component';
 import { Error403PageComponent } from './pages/403/403.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 
 
@@ -35,10 +36,11 @@ const routes: Routes = [
   { path: 'categories', component: CategoryPageComponent },
   { path: 'category', component: CatalogPageComponent },
   { path: 'order-history', component: OrderHistoryPageComponent },
-  { path: 'order/:id', component: OrderStatusPageComponent },
+  { path: 'order', component: OrderStatusPageComponent },
   { path: 'wish-list', component: WishListComponent },
   { path: 'promotions', component: PromotionsPageComponent },
   { path: 'admin', component: AdminPageComponent },
+  { path: 'search', component: SearchPageComponent },
 ];
 
 @NgModule({
@@ -58,11 +60,13 @@ const routes: Routes = [
     WishListComponent,
     PromotionsPageComponent,
     Error403PageComponent,
-    Error404PageComponent
-  ],
+    Error404PageComponent,
+    SearchPageComponent],
+
   imports: [
     CommonModule,
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     MainPageModule,
     RouterModule.forChild(routes)

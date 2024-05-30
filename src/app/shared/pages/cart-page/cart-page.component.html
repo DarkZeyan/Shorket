@@ -1,9 +1,79 @@
-
 <div class="container-fluid row">
   <div class="col-8">
     <cart-table-component [cartItems]="cartItems"></cart-table-component>
+
+
   </div>
-  <div class="col-4">
+
+  <div class="col-4" *ngIf="user==null">
+    <div class=" container mt-5 justify-content-center">
+      <div class="row">
+
+        <h4 class="text-center">
+          Por favor, inicia sesión para proceder al pago
+        </h4>
+      </div>
+      <div class="row ">
+        <a [routerLink]="['/login']" class="btn btn-warning mt-3">Iniciar sesión</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4" *ngIf="user">
     <payment-method></payment-method>
+    <div class="container justify-content-center d-flex">
+      <button [disabled]="selectedAddressID==0 || cartItems.length == 0" (click)="createOrder(selectedAddressID)" class="btn btn-warning mt-3">Proceder al pago</button>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="user && addressesLength >0 && cartItems.length>0" class="container m-3 row">
+  <div class="row m-5">
+    <div class="col-6">
+      <div class="container">
+        <div class="row">
+          <h4 class="text-center">Dirección de envío</h4>
+        </div>
+        <div class="row">
+          <!-- Crear select con las direcciones del cliente -->
+          <select [(ngModel)]="selectedAddressID" class="form-select" aria-label="Selecciona una direccion de envio">
+            <option disabled selected value="0">Selecciona una dirección</option>
+            <option *ngFor="let address of addresses | async" [value]="address.address_id">{{address.address_line_1}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="user && addressesLength===0 && cartItems.length>0" class="container m-3 row">
+  <div class="row m-5">
+    <div class="col-6">
+      <div class="container">
+        <div class="row">
+          <h4 class="text-center">
+            No tienes direcciones registradas, por favor dirigete a tus direcciones para agregar una
+          </h4>
+        </div>
+        <div class="row">
+          <a [routerLink]="['/addresses']" class="btn btn-warning mt-3">Ir a mis direcciones</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="toast-container position-absolute top-50 start-50 translate-middle">
+  <div class="toast" id="successToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Orden exitosa</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Tu orden ha sido creada exitosamente!
+    </div>
   </div>
 </div>

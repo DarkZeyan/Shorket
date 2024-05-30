@@ -10,6 +10,11 @@
           <p class="card-text"> <span class="bi bi-geo-alt-fill"></span> {{address.city}}, {{address.state}}. {{ address.country }}</p>
           <p class="card-text"> <span class="bi bi-mailbox2"></span> Codigo postal: {{address.postal_code}}</p>
           <p class="card-text"> <span class="bi bi-phone-fill"></span> Telefono: {{address.phone_number}}</p>
+          <div class="row justify-content-center">
+            <div class="col-3">
+              <button class="btn btn-primary" (click)="showUpdateModal(address)" data-bs-target="#editAddressModal">Editar</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -71,6 +76,63 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button (click)="onSubmit()" type="button" class="btn btn-primary">Añadir direccion</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para actualizar direccion -->
+
+<div class="modal fade" id="updateAddressModal" tabindex="-1" aria-labelledby="editAddressModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editAddressModalLabel">Editar direccion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateAddressForm" (ngSubmit)="onSubmitAddressUpdate()">
+          <div class="form-group">
+            <label class="form-label" for="name">Nombre completo</label>
+            <input class="form-control" type="text" id="name" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="address_line_1">Direccion Linea 1</label>
+            <input class="form-control" type="text" id="address_line_1" formControlName="address_line_1">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="address_line_2">Direccion Linea 2</label>
+            <input class="form-control" type="text" id="address_line_2" formControlName="address_line_2">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="city">Ciudad</label>
+            <input class="form-control" type="text" id="city" formControlName="city">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="state">Estado</label>
+            <input class="form-control" type="text" id="state" formControlName="state">
+          </div>
+          <div class="form-group">
+            <label class="form-label
+            " for="country">Pais</label>
+            <input class="form-control" type="text" id="country" formControlName="country">
+          </div>
+          <div class="form-group">
+            <label class="form-label
+            " for="postal_code">Codigo Postal</label>
+            <input class="form-control" type="text" id="postal_code" formControlName="postal_code">
+          </div>
+          <div class="form-group">
+            <label class="form-label
+            " for="phone_number">Número de teléfono</label>
+            <input class="form-control" type="text" id="phone_number" formControlName="phone_number">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button (click)="onSubmitAddressUpdate()" type="button" class="btn btn-primary">Actualizar direccion</button>
       </div>
     </div>
   </div>

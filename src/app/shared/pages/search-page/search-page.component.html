@@ -1,0 +1,38 @@
+<div style="min-height: 55vh;">
+
+
+<h1 class="text-center mt-5 mb-5">
+  {{search| titlecase}}
+</h1>
+<div class="d-flex justify-content-center align-items-center mt-5 mb-5">
+
+</div>
+
+<div *ngIf="products.length==0" class="d-flex justify-content-center align-items-center">
+  <h1 class="text-center">
+    No se encontraron productos
+    <span class="bi bi-emoji-frown"></span>
+  </h1>
+</div>
+
+<div class="row m-5">
+  <div *ngFor="let product of products" class="col-md-4 col-sm-7">
+    <a [routerLink]="['/products']" [queryParams]="{product_id: product.product_id}" class="product-link">
+      <div class="card mb-4 text-center">
+        <img [src]="product.image !== null ? 'data:image/png;base64,'+product.image
+        : 'assets/product-imgs/image-not-available.png'" [alt]="product.name"
+        class="card-img-top cat-img mx-auto d-block mt-3 product-img">
+        <div class="card-body">
+          <h5 class="card-text">
+            {{product.name | titlecase}}
+          </h5>
+          <p class="card-text">
+            {{product.price | currency}}
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+
+</div>

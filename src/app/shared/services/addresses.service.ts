@@ -51,6 +51,14 @@ export class AddressService {
     );
   }
 
+  getFirstAddressByUser(user_id: number): Observable<Address> {
+    return this.httpClient.get<Address>(`${this.API_URL}/user/${user_id}/first`).pipe(
+      tap(address => {
+        return address
+      })
+    );
+  }
+
 
   // crear dirección
   createAddress(address: Address, user_id: number): Observable<Address> {
@@ -70,6 +78,7 @@ export class AddressService {
 
   // actualizar dirección
   updateAddress(address: Address): Observable<Address> {
+
     return this.httpClient.put<Address>(`${this.API_URL}/${address.address_id}`, address).pipe(
       tap(updatedAddress => {
         const addresses = this.addresses.value.map(a => {
@@ -85,14 +94,16 @@ export class AddressService {
 
 
   // eliminar la dirección por objeto y a partir de ahi se elimina por id
-  deleteAddress(address: Address): Observable<Address> {
-    return this.httpClient.delete<Address>(`${this.API_URL}/${address.address_id}`).pipe(
+  deleteAddress(address_id: number): Observable<Address> {
+    return this.httpClient.delete<Address>(`${this.API_URL}/${address_id}`).pipe(
       tap(() => {
-        const addresses = this.addresses.value.filter(a => a.address_id !== address.address_id);
+        const addresses = this.addresses.value.filter(a => a.address_id !== address_id);
         this.addresses.next(addresses);
       })
     );
   }
+
+
 
 
 }

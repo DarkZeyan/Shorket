@@ -8,3 +8,13 @@ export interface Product {
   stock: number;
   image?: string;
 }
+
+export interface ProductBody {
+  name: string;
+  brand: string;
+  category_id: number;
+  description?: string;
+  price: number;
+  stock: number;
+  image?: string;
+}

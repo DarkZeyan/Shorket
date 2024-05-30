@@ -24,8 +24,8 @@
       <div class="ml-5 col-md-3 product-actions">
         <div class="row m-3">
           <div class="input-group">
-            <label class="input-group-text" for="quantity">Cantidad</label>
-            <select class="form-select" id="quantity">
+            <label class="input-group-text" >Cantidad</label>
+            <select class="form-select"  [(ngModel)]="quantity" name="quantity" id="quantity">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -35,12 +35,12 @@
           </div>
         </div>
         <div class="row m-3 p-2">
-          <button class="btn btn-primary">
+          <button (click)="addToCart(productRef,quantity)" class="btn btn-primary">
             Agregar al carrito <span class="bi bi-cart-fill"></span>
           </button>
         </div>
         <div class="row m-3">
-          <button class="btn btn-info text-light">
+          <button (click)="addToWishList(wishList, productRef)" class="btn btn-info text-light">
             Añadir a lista de deseados <span class="bi bi-star-fill"></span>
           </button>
         </div>
@@ -50,7 +50,7 @@
               <p class="card-title text-white">Fecha estimada de entrega</p>
             </div>
             <div class="mb-3 card bg-light">
-              <p class="card-text ">{{'2024-07-01' | date: "dd MMMM y":"":"es-MX" }}</p>
+              <p class="card-text ">{{deliveryDateLabel| date: "dd MMMM y":"":"es-MX" }}</p>
             </div>
           </div>
         </div>
@@ -64,4 +64,27 @@
   </div>
   <div class="col-md-4">
     <suggested-products [suggestedProducts]="suggestedProducts"></suggested-products>
+</div>
+
+<div class="toast-container position-absolute top-50 start-50 translate-middle">
+  <div class="toast" id="cartToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Product añadido</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      El producto se ha añadido al carrito
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-absolute top-50 start-50 translate-middle">
+  <div class="toast" id="wishingToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Product deseado</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      El producto se ha añadido a la lista de favoritos
+  </div>
 </div>

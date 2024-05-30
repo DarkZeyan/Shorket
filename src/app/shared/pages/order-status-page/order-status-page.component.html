@@ -13,9 +13,9 @@
       <div class="col-md-3">
         <div class="card bg-transparent">
           <div class="card-body">
-            <img [src]="(getMostExpensiveProductByOrderDetail((order|async)!.order_id)|async)?.image" alt=""
+            <img [src]="mostExpensiveProduct!.image ? 'data:image/png;base64,'+mostExpensiveProduct!.image : 'assets/product-imgs/image-not-available.png'" alt=""
               class="primary-product card-img-top mx-auto d-block">
-            <h4 class="card-title mt-3 text-center"> <strong>{{(getMostExpensiveProductByOrderDetail((order|async)!.order_id)|async)?.name | uppercase}}</strong> </h4>
+            <h4 class="card-title mt-3 text-center"> <strong>{{mostExpensiveProduct?.name| uppercase}}</strong> </h4>
           </div>
         </div>
       </div>
@@ -78,14 +78,37 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let detail of orderDetails | async;">
+        <tr *ngFor="let detail of orderDetails | async; let i = index">
           <td>
-          <a [routerLink]="['/category', (getProductByOrderDetail(detail)|async)?.category_id ,'products']" [queryParams]="{product_id: (getProductByOrderDetail(detail)|async)?.product_id}">
-            {{ (getProductByOrderDetail(detail)|async)?.name}}</a>
+          <a [routerLink]="['/products']" [queryParams]="{product_id: productsFromDetails[i].product_id}">
+            {{ productsFromDetails[i].name}}</a>
           </td>
           <td>{{ detail.quantity }}</td>
-          <td>{{ (getProductByOrderDetail(detail)|async)?.price | currency}}</td>
+          <td>{{ productsFromDetails[i].price | currency}}</td>
           <td *ngIf="detail.subtotal">{{detail.subtotal | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="justify-content-center mt-5" *ngIf="orderAddress">
+  <h3 class="text-center">Direccion a la que sera enviada</h3>
+  <div class="m-5">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th class="table-dark">Persona que recibe</th>
+          <th class="table-dark">Direccion</th>
+          <th class="table-dark">Codigo Postal</th>
+          <th class="table-dark">Numero de telefono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ orderAddress!.name }}</td>
+          <td>{{ orderAddress!.address_line_1  }} {{ orderAddress!.address_line_2 }} , {{ orderAddress!.city }}, {{ orderAddress!.state}} , {{orderAddress!.country}}</td>
+          <td>{{ orderAddress!.postal_code}}</td>
+          <td>{{ orderAddress!.phone_number }}</td>
         </tr>
       </tbody>
     </table>

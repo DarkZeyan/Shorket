@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { 403Component } from './403.component';
+import { SearchPageComponent } from './search-page.component';
 
-describe('403Component', () => {
-  let component: 403Component;
-  let fixture: ComponentFixture<403Component>;
+describe('SearchPageComponent', () => {
+  let component: SearchPageComponent;
+  let fixture: ComponentFixture<SearchPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [403Component]
+      declarations: [SearchPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(403Component);
+    fixture = TestBed.createComponent(SearchPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

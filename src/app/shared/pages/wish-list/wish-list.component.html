@@ -5,30 +5,27 @@
   <!--
     Si no hay wishlist, mostrar un mensaje de que no hay productos en la lista de deseos
   -->
-  <div class="alert alert-info" *ngIf="WishListDetails.length==0">
+  <div class="alert alert-info" *ngIf="wishListLength==0">
     <h4 class="text-center">No hay productos en la lista de deseos</h4>
   </div>
-  <div class="row m-3" *ngIf="WishListDetails.length>0">
-    <div *ngFor="let wishListDetail of WishListDetails;" class="col-sm-4 mb-3">
+  <div class="row m-3" *ngIf="wishListLength>0">
+
+    <div *ngFor="let product of productsWithDetails" class="col-sm-4 mb-3">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title text-center"> <span class="bi bi-heart-fill"></span>
-            {{(getProductById(wishListDetail.product_id)|async)?.name}}</h5>
-          <img [src]="(getProductById(wishListDetail.product_id)|async)?.image  !== null ? 'data:image/png;base64,'+(getProductById(wishListDetail.product_id)|async)?.image
+            {{product.product?.name}}</h5>
+          <img [src]="product.product?.image  !== null ? 'data:image/png;base64,'+product.product?.image
           : 'assets/product-imgs/image-not-available.png'" class="card-img"
-            [alt]="(getProductById(wishListDetail.product_id)|async)?.name">
-          <p class="card-text"> <span class="bi bi-cash"></span> Precio: {{ (getProductById(wishListDetail.product_id) |
-            async)?.price | currency }}</p>
+            [alt]="product.product?.name">
+          <p class="card-text"> <span class="bi bi-cash"></span> Precio: {{ product.product?.price| currency }}</p>
           <!-- Botones para agregar al carrito y eliminarlo de la wishlist  -->
           <div class="d-flex">
-            <button class="btn btn-primary mx-auto">Agregar al carrito</button>
-            <button class="btn btn-danger mx-auto">Eliminar de la lista de deseos</button>
+            <button (click)="addToCart(product.product!, product.detail.detail_id)" class="btn btn-primary mx-auto">Agregar al carrito</button>
+            <button (click)="deleteDetailFromWishList(product.detail.detail_id)" class="btn btn-danger mx-auto">Eliminar de la lista de deseos</button>
           </div>
         </div>
       </div>
     </div>
-
   </div>
-
-
 </div>

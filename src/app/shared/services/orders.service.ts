@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Order, OrderDetail } from '@shared/intefaces/order.interface';
+import { Address } from '@shared/intefaces/address.interface';
+import { Order, OrderBody, OrderDetail, OrderDetailBody } from '@shared/intefaces/order.interface';
 import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -17,11 +18,13 @@ export class OrdersService {
 
 
   getOrdersFromUser(user_id: number): Observable<Order[]> {
-
-    if (this.ordersLoaded) {
+    console.log(user_id)
+    if (!this.ordersLoaded) {
       return this.httpClient.get<Order[]>(`${this.API_URL}/user/${user_id}`).pipe(
         tap(orders => {
+          console.log(orders)
           this.orders.next(orders);
+          this.ordersLoaded = true;
         })
       );
     } else {
@@ -30,9 +33,10 @@ export class OrdersService {
   }
 
   getOrderDetailsByOrderId(order_id: number): Observable<OrderDetail[]> {
-    if (this.orderDetailsLoaded) {
+    if (!this.orderDetailsLoaded) {
       return this.httpClient.get<OrderDetail[]>(`${this.API_URL}/${order_id}/details`).pipe(
         tap(details => {
+          this.orderDetailsLoaded = true;
           this.orderDetails.next(details);
         })
       );
@@ -42,7 +46,11 @@ export class OrdersService {
   }
 
   getOrderByOrderId(order_id: number): Observable<Order> {
-    return this.httpClient.get<Order>(`${this.API_URL}/${order_id}`);
+    return this.httpClient.get<Order>(`${this.API_URL}/${order_id}`).pipe(
+      tap(order => {
+        console.log(order)
+      })
+    );
   }
 
 
@@ -63,8 +71,47 @@ export class OrdersService {
       mostExpensiveDetail = details.reduce((previous, current) => {
         return previous.subtotal > current.subtotal ? previous : current;
       });
+      console.log(mostExpensiveDetail)
     });
 
     return mostExpensiveDetail;
   }
+
+  // Create a new order
+  createOrder(orderBody: OrderBody): Observable<Order> {
+    return this.httpClient.post<Order>(this.API_URL, orderBody);
+  }
+
+  // Create a new order detail
+  createOrderDetail(detail: OrderDetailBody): Observable<OrderDetail> {
+    console.log(detail)
+    return this.httpClient.post<OrderDetail>(`${this.API_URL}/detail`, detail);
+  }
+
+  // Update order status
+  updateOrderStatus(order_id: number, status: string): Observable<Order> {
+    return this.httpClient.put<Order>(`${this.API_URL}/${order_id}`, { status });
+  }
+
+  // Delete an order
+  deleteOrder(order_id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.API_URL}/${order_id}`);
+  }
+
+  // Delete an order detail
+  deleteOrderDetail(detail_id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.API_URL}/details/${detail_id}`);
+  }
+
+  createOrderUserAddress(user_id: number, address_id: number, order_id: number): Observable<void> {
+    console.log(user_id, address_id, order_id)
+    return this.httpClient.post<void>(`${this.API_URL}/orderuseraddress/${order_id}/${user_id}/${address_id}`, { user_id, address_id, order_id });
+  }
+
+
+  getOrderAddressIDByOrderId(order_id: number): Observable<{ address_id: number }> {
+    return this.httpClient.get<{ address_id: number }>(`${this.API_URL}/${order_id}/address`);
+  }
+
+
 }
