@@ -58,7 +58,7 @@ export class OrderStatusPageComponent implements OnInit {
 
       });
     } catch (error) {
-      console.log(error)
+
     }
   }
 

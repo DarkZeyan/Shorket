@@ -23,7 +23,6 @@ export class WishListService {
     if (!this.isDetailsLoaded) {
       return this.httpClient.get<WishListDetail[]>(`${this.API_URL}/details/${list_id}`).pipe(
         tap(details => {
-          console.log(details)
           this.WishListDetails.next(details);
         })
       );
@@ -50,7 +49,6 @@ export class WishListService {
       list_id: list_id,
       product_id: product_id
     }
-    console.log(detail)
     return this.httpClient.post<WishListDetail>(`${this.API_URL}/details`, detail);
   }
 

@@ -57,7 +57,7 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
   onSubmit(): void {
     if (this.loginForm.valid) {
       // Call the login service
-      console.log(this.loginForm.value);
+
       this.usersService.getUserByEmailPassword(this.loginForm.value.email_login, this.loginForm.value.password_login).subscribe(
         (user: User | null) => {
           // Handle successful login
@@ -70,7 +70,6 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
             }, 500);
           }
           else {
-            console.log('Login failed');
             this.loginFailed = true;
             setInterval(() => {
               this.loginFailed = false;
@@ -96,7 +95,6 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
       }
 
       // Convert the birth_date to a string
-      console.log(this.registerForm.value.birth_date);
       const birth_date = `${this.registerForm.value.birth_date.year}-${this.registerForm.value.birth_date.month}-${this.registerForm.value.birth_date.day}`;
       this.registerForm.value.birth_date = birth_date;
 
@@ -109,11 +107,9 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
       // Call the create user service
       this.usersService.createUser(user).subscribe(
         (createdUser: User) => {
-          console.log(createdUser)
           // After creating the user, log the user in
           this.usersService.getUserByEmailPassword(createdUser.email, createdUser.password).subscribe(
             (loggedInUser: User | null) => {
-              console.log(loggedInUser)
               if (loggedInUser) {
 
                 // Call the register service
@@ -132,16 +128,13 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
 
               }
               else {
-                console.log('Login failed');
               }
             },
             (loginError) => {
-              console.log(loginError);
             }
           );
         },
         (createError) => {
-          console.log(createError);
         }
       );
 

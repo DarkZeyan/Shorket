@@ -23,7 +23,6 @@ export class UsersService {
     if (this.isUserLoaded) {
       return of(this.user);
     }
-    console.log('Getting user from API')
     return this.httpClient.get<User>(`${this.API_URL}/user`, {
       params: {
         email: email,
