@@ -26,6 +26,7 @@ export class CategoryService {
     }
   }
 
+
   getCategoryById(id: number): Observable<Category> {
 
     return this.getCategories().pipe(
@@ -35,6 +36,22 @@ export class CategoryService {
           throw new Error('Category not found');
         }
         return category;
+      })
+    );
+  }
+
+  addCategory(name: string): Observable<Category> {
+    return this.httpClient.post<Category>('http://localhost:8000/categories', { name: name }).pipe(
+      tap(category => {
+        this.categories.next([...this.categories.getValue(), category]);
+      })
+    );
+  }
+
+  deleteCategory(id: number): Observable<Category> {
+    return this.httpClient.delete<Category>(`http://localhost:8000/categories/${id}`).pipe(
+      tap(() => {
+        this.categories.next(this.categories.getValue().filter(category => category.category_id !== id));
       })
     );
   }

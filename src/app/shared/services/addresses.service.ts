@@ -94,10 +94,10 @@ export class AddressService {
 
 
   // eliminar la dirección por objeto y a partir de ahi se elimina por id
-  deleteAddress(address: Address): Observable<Address> {
-    return this.httpClient.delete<Address>(`${this.API_URL}/${address.address_id}`).pipe(
+  deleteAddress(address_id: number): Observable<Address> {
+    return this.httpClient.delete<Address>(`${this.API_URL}/${address_id}`).pipe(
       tap(() => {
-        const addresses = this.addresses.value.filter(a => a.address_id !== address.address_id);
+        const addresses = this.addresses.value.filter(a => a.address_id !== address_id);
         this.addresses.next(addresses);
       })
     );

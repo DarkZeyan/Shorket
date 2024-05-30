@@ -21,7 +21,7 @@ export class AddressesPageComponent implements AfterViewInit, OnInit {
   modalUpdate!: Modal;
 
   addressForm: FormGroup;
-  updateAddress: FormGroup;
+  updateAddressForm: FormGroup;
 
   constructor(private fb: FormBuilder, private addressService: AddressService, private userService: UsersService, private router: Router) {
     this.addressForm = this.fb.group({
@@ -38,8 +38,9 @@ export class AddressesPageComponent implements AfterViewInit, OnInit {
       phone_number: ['', Validators.required]
     });
 
-    this.updateAddress = this.fb.group({
+    this.updateAddressForm = this.fb.group({
       // Define form controls for each address field
+      address_id: ['', Validators.required],
       name: ['', Validators.required],
       address_line_1: ['', Validators.required],
       address_line_2: [''],
@@ -53,6 +54,13 @@ export class AddressesPageComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.modal = new Modal(document.getElementById('addAddressModal')!);
+    this.modalUpdate = new Modal(document.getElementById('updateAddressModal')!);
+  }
+
+  showUpdateModal(address: Address) {
+    this.modalUpdate.show();
+    this.updateAddressForm.patchValue(address);
+
   }
 
   ngOnInit() {
@@ -61,8 +69,7 @@ export class AddressesPageComponent implements AfterViewInit, OnInit {
     }
     this.user = this.userService.getUserFromCookies()!;
     this.addresses = this.addressService.getAddressesByUser(this.user.user_id);
-    console.log(this.addresses)
-    console.log(this.addresses)
+
   }
 
   onSubmit() {
@@ -71,7 +78,18 @@ export class AddressesPageComponent implements AfterViewInit, OnInit {
       this.addressForm.reset();
       this.modal.hide()
     }
+
   }
+
+  onSubmitAddressUpdate() {
+    if (this.updateAddressForm.valid) {
+      this.updateAddress(this.updateAddressForm.value);
+      this.updateAddressForm.reset();
+      this.modalUpdate.hide()
+    }
+
+  }
+
   createAddress(address: Address, user_id: number) {
 
     return this.addressService.createAddress(address, user_id).subscribe(() => {
@@ -79,4 +97,14 @@ export class AddressesPageComponent implements AfterViewInit, OnInit {
     });
   }
 
+  deleteAddress(address_id: number) {
+    this.addressService.deleteAddress(address_id).subscribe(() => {
+      this.addresses = this.addressService.getAddressesByUser(this.userService.getUserFromCookies()!.user_id);
+    });
+  }
+  updateAddress(address: Address) {
+    return this.addressService.updateAddress(address).subscribe(() => {
+      this.addresses = this.addressService.getAddressesByUser(this.userService.getUserFromCookies()!.user_id);
+    });
+  }
 }

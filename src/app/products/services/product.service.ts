@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, switchMap, tap, catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
-import { Product } from '@products/interfaces/product.interface';
+import { Product, ProductBody } from '@products/interfaces/product.interface';
 import { ProductReview } from '@products/interfaces/product-review.interface';
 import { Router } from '@angular/router';
 
@@ -109,6 +109,23 @@ export class ProductService {
       )
     );
 
+  }
+
+  createProduct(product: ProductBody): Observable<Product> {
+    return this.httpClient.post<Product>(this.API_URL, product).pipe(
+      tap(newProduct => {
+        this.products.next([...this.products.value, newProduct]);
+      })
+    );
+  }
+
+  deleteProduct(product: Product): Observable<Product> {
+    return this.httpClient.delete<Product>(`${this.API_URL}/${product.product_id}`).pipe(
+      tap(() => {
+        const products = this.products.value.filter(p => p.product_id !== product.product_id);
+        this.products.next(products);
+      })
+    );
   }
 
 }
