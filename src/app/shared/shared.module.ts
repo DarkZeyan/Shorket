@@ -25,6 +25,7 @@ import { WishListComponent } from './pages/wish-list/wish-list.component';
 import { PromotionsPageComponent } from './pages/promotions-page/promotions-page.component';
 import { Error404PageComponent } from './pages/404/404.component';
 import { Error403PageComponent } from './pages/403/403.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 
 
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'wish-list', component: WishListComponent },
   { path: 'promotions', component: PromotionsPageComponent },
   { path: 'admin', component: AdminPageComponent },
+  { path: 'search', component: SearchPageComponent },
 ];
 
 @NgModule({
@@ -58,7 +60,8 @@ const routes: Routes = [
     WishListComponent,
     PromotionsPageComponent,
     Error403PageComponent,
-    Error404PageComponent],
+    Error404PageComponent,
+    SearchPageComponent],
 
   imports: [
     CommonModule,

@@ -1,0 +1,27 @@
+<h1 class="text-center mt-5 mb-5">
+  {{category.name| titlecase}}
+</h1>
+<div class="d-flex justify-content-center align-items-center mt-5 mb-5">
+  <img [src]="'data:image/png;base64,'+banner_img" alt="">
+</div>
+
+<div class="row m-5">
+  <div *ngFor="let product of products |async" class="col-md-4 col-sm-7">
+    <a [routerLink]="['/products']" [queryParams]="{product_id: product.product_id}" class="product-link">
+      <div class="card mb-4 text-center">
+        <img [src]="product.image !== null ? 'data:image/png;base64,'+product.image
+        : 'assets/product-imgs/image-not-available.png'" [alt]="product.name"
+        class="card-img-top cat-img mx-auto d-block mt-3 product-img">
+        <div class="card-body">
+          <h5 class="card-text">
+            {{product.name | titlecase}}
+          </h5>
+          <p class="card-text">
+            {{product.price | currency}}
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+

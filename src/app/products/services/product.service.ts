@@ -128,4 +128,12 @@ export class ProductService {
     );
   }
 
+  getSearchedProductsByName(name: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(`${this.API_URL}/search/${name}`).pipe(
+      tap(products => {
+        this.products.next(products);
+      })
+    );
+  }
+
 }
