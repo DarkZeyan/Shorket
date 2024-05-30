@@ -34,10 +34,8 @@ export class CartPageComponent implements OnInit, AfterViewInit {
 
   // Convert cart items to an order
   createOrder(address_id: number): void {
-    console.log('Creating order')
     const deliveryDate = new Date();
     deliveryDate.setDate(deliveryDate.getDate() + 7);
-    console.log(deliveryDate)
     const orderBody: OrderBody = {
       status: 'Pending',
       total: this.cartService.cartItems.reduce((acc, item) => acc + (item.product.price * item.quantity), 0),
@@ -55,12 +53,7 @@ export class CartPageComponent implements OnInit, AfterViewInit {
 
 
     this.orderService.createOrder(orderBody).subscribe((order: Order) => {
-      console.log(user)
-      this.orderService.createOrderUserAddress(user.user_id, address_id, order.order_id).subscribe((orderUserAddress) => {
-        console.log('orderUserAddress registrada');
-        console.log(address_id)
-      });
-      console.log('Carrito', this.cartItems)
+      this.orderService.createOrderUserAddress(user.user_id, address_id, order.order_id);
       this.cartItems.forEach(cartItem => {
         const orderDetailBody = {
           order_id: order.order_id,
@@ -68,10 +61,8 @@ export class CartPageComponent implements OnInit, AfterViewInit {
           quantity: cartItem.quantity,
           subtotal: cartItem.product.price * cartItem.quantity
         };
-        console.log(orderDetailBody);
         this.orderService.createOrderDetail(orderDetailBody).subscribe((orderDetail: OrderDetail) => {
           // Se crea el detalle de la orden
-          console.log('orderDetail registrada', orderDetail);
         });
       });
       this.successFullOrder.show();
@@ -93,7 +84,6 @@ export class CartPageComponent implements OnInit, AfterViewInit {
     this.addresses = this.addressService.getAddressesByUser(this.user!.user_id);
     this.addresses.subscribe((addresses) => {
       this.addressesLength = addresses.length;
-      console.log(this.addressesLength)
     });
   }
 

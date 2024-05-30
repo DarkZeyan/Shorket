@@ -18,11 +18,9 @@ export class OrdersService {
 
 
   getOrdersFromUser(user_id: number): Observable<Order[]> {
-    console.log(user_id)
     if (!this.ordersLoaded) {
       return this.httpClient.get<Order[]>(`${this.API_URL}/user/${user_id}`).pipe(
         tap(orders => {
-          console.log(orders)
           this.orders.next(orders);
           this.ordersLoaded = true;
         })
@@ -48,7 +46,6 @@ export class OrdersService {
   getOrderByOrderId(order_id: number): Observable<Order> {
     return this.httpClient.get<Order>(`${this.API_URL}/${order_id}`).pipe(
       tap(order => {
-        console.log(order)
       })
     );
   }
@@ -71,7 +68,6 @@ export class OrdersService {
       mostExpensiveDetail = details.reduce((previous, current) => {
         return previous.subtotal > current.subtotal ? previous : current;
       });
-      console.log(mostExpensiveDetail)
     });
 
     return mostExpensiveDetail;
@@ -84,7 +80,6 @@ export class OrdersService {
 
   // Create a new order detail
   createOrderDetail(detail: OrderDetailBody): Observable<OrderDetail> {
-    console.log(detail)
     return this.httpClient.post<OrderDetail>(`${this.API_URL}/detail`, detail);
   }
 
@@ -104,7 +99,6 @@ export class OrdersService {
   }
 
   createOrderUserAddress(user_id: number, address_id: number, order_id: number): Observable<void> {
-    console.log(user_id, address_id, order_id)
     return this.httpClient.post<void>(`${this.API_URL}/orderuseraddress/${order_id}/${user_id}/${address_id}`, { user_id, address_id, order_id });
   }
 

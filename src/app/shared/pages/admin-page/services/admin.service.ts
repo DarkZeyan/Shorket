@@ -15,7 +15,6 @@ export class AdminUserService {
 
 
   getAdminUserByUsernameAndPassword(username: string, password: string): Observable<AdminUser> {
-    console.log(username, password)
     return this.httpClient.get<AdminUser>(`${this.API_URL}/${username}/${password}`);
   }
 

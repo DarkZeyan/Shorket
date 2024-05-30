@@ -71,7 +71,6 @@ export class AddressService {
       tap(newAddress => {
         this.addresses.next([...this.addresses.value, newAddress]);
         // Create a new value in user_addresses table
-        console.log(newAddress.address_id)
       })
     );
   }

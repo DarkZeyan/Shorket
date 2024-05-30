@@ -37,7 +37,6 @@ export class WishListComponent implements OnInit {
             return this.getWishListDetailsByWishListId(wishList.list_id).pipe(
               switchMap(wishListDetails => {
                 this.wishListLength = wishListDetails.length;
-                console.log(wishListDetails)
                 // Use forkJoin to fetch all products in parallel
                 return forkJoin(wishListDetails.map(detail => this.getProductById(detail.product_id).pipe(
                   map(product => ({ product, detail })) // Map each product to an object that contains the product and its detail
@@ -56,7 +55,6 @@ export class WishListComponent implements OnInit {
       ).subscribe(productsWithDetails => {
         // 'productsWithDetails' is an array of objects, where each object contains a product and its detail
         this.productsWithDetails = productsWithDetails;
-        console.log(productsWithDetails)
       });
     }
   }

@@ -25,7 +25,6 @@ export class OrderHistoryPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.user = this.userService.getUserFromCookies()!;
-    console.log(this.user.user_id)
     this.orders = this.orderService.getOrdersFromUser(this.user.user_id);
     this.orders.subscribe((orders: Order[]) => {
       this.ordersLength = orders.length;
