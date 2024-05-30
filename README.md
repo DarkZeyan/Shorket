@@ -13,19 +13,18 @@ Este proyecto ha sido creado con Angular 17.2
 Shortek se caracteriza por ser una aplicación desarrollada exclusivamente con Angular y MySQL que utilice el desarrollo integrado de una base de datos consistente y normalización.
 Así mismo, Shorket funciona como una aplicación que será el proyecto final de las asignaturas "Administración de Bases de Datos" y "Programación Front End".
 
-## Creacion de componentes de código
+## Ubicacion del proyecto
 
-Ejecuta el comando `ng generate component component-name` para generar nuevos componentes.  Tambien puedes utilizar los comandos `ng generate directive|pipe|service|class|guard|interface|enum|module`
-para generar otro tipos de elementos utiles en Angular.
+El proyecto actualmente se encuentra hosteado en Vercel y la BD con su API en Amazon Web Services.
+En caso de querer acceder al sitio hay que entrar al link <https://shortek.zeyan.live>
 
-## Build del proyecto
+Para entrar a la pestaña de administrador, utilizar el path /admin . Los accesos estan proporcionados en la tabla "admin_user" de la BD.
 
-Ejecuta  `ng build` para hacer el build del proyecto. Los artifacts del build del proyecto seran guardados en el directorio `dist/`.
+### Integrantes del equipo CassandraDB
 
-## Ejecutar pruebas unitarias
-
-Ejecuta  `ng test` para correr las pruebas unitarias haciendo uso de [Karma](https://karma-runner.github.io).
-
-## Corriendo las pruebas end-to-end
-
-Ejecuta `ng e2e` para ejecutar las pruebas end-to-end a traves de la plataforma de tu eleccion. Para usarlo se necesita añadir un paquete adicional que sea capaz de ejecutar las pruebas de end-to-end.
+- Jorge Eduardo Escobar Bugarini - 21550317
+- Edgar Gerardo Delgado Cerrillo - 21550297
+- Jose Sebastian Lopez Ibarra - 21550362
+- Andres Saenz Olivas - 21550390
+- Jesus Alejandro Torres Ramirez - 21550341
+- Diego Gael Martin del Campo Loa - 21550321
