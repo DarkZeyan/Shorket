@@ -14,7 +14,7 @@ export class WishListService {
 
 
 
-  private API_URL = 'http://localhost:8000/wishlists';
+  private API_URL = 'https://f5bzmcmfqw.us-east-2.awsapprunner.com/wishlists';
 
   constructor(private httpClient: HttpClient) { }
 

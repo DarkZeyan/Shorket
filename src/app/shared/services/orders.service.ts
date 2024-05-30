@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class OrdersService {
 
-  API_URL = 'http://localhost:8000/orders';
+  API_URL = 'https://f5bzmcmfqw.us-east-2.awsapprunner.com/orders';
   orders: BehaviorSubject<Order[]> = new BehaviorSubject<Order[]>([]);
   ordersLoaded: boolean = false;
   orderDetailsLoaded: boolean = false;

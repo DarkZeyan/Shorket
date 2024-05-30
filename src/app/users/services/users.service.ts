@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class UsersService {
 
-  private API_URL = 'http://localhost:8000/users';
+  private API_URL = 'https://f5bzmcmfqw.us-east-2.awsapprunner.com/users';
   private isUserLoaded: boolean = false;
   private user: User | null = null;
 

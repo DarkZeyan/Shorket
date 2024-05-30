@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class ProductService {
 
-  private API_URL = 'http://localhost:8000/products';
-  private API_URL_REVIEWS = 'http://localhost:8000/reviews';
+  private API_URL = 'https://f5bzmcmfqw.us-east-2.awsapprunner.com/products';
+  private API_URL_REVIEWS = 'https://f5bzmcmfqw.us-east-2.awsapprunner.com/reviews';
 
   private product!: Product;
 

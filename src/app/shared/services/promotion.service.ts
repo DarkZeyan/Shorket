@@ -8,7 +8,7 @@ export class PromotionService {
 
   private promotions: BehaviorSubject<Promotion[]> = new BehaviorSubject<Promotion[]>([]);
   private promotionsLoaded: boolean = false;
-  private API_URL = 'http://localhost:8000/promotions';
+  private API_URL = 'https://f5bzmcmfqw.us-east-2.awsapprunner.com/promotions';
 
   constructor(private httpClient: HttpClient) { }
 

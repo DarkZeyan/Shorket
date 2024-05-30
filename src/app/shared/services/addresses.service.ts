@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AddressService {
 
-  private API_URL = 'http://localhost:8000/addresses';
+  private API_URL = 'https://f5bzmcmfqw.us-east-2.awsapprunner.com/addresses';
 
   private addresses: BehaviorSubject<Address[]> = new BehaviorSubject<Address[]>([]);
   private addressesLoaded: boolean = false;

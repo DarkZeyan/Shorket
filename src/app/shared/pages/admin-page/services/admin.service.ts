@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AdminUserService {
 
-  API_URL = 'http://localhost:8000/users/admin';
+  API_URL = 'https://f5bzmcmfqw.us-east-2.awsapprunner.com/users/admin';
   constructor(private httpClient: HttpClient) {
 
 
