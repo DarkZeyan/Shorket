@@ -20,7 +20,7 @@ En caso de querer acceder al sitio hay que entrar al link <https://shortek.zeyan
 
 Para entrar a la pestaña de administrador, utilizar el path /admin . Los accesos estan proporcionados en la tabla "admin_user" de la BD.
 
-### Integrantes del equipo CassandraDB
+### Integrantes del equipo CassandraDB (Para Administración de Bases de Datos)
 
 - Jorge Eduardo Escobar Bugarini - 21550317
 - Edgar Gerardo Delgado Cerrillo - 21550297
@@ -28,3 +28,11 @@ Para entrar a la pestaña de administrador, utilizar el path /admin . Los acceso
 - Andres Saenz Olivas - 21550390
 - Jesus Alejandro Torres Ramirez - 21550341
 - Diego Gael Martin del Campo Loa - 21550321
+
+### Integrantes del equipo (Programación Web FrontEnd)
+
+- Jorge Eduardo Escobar Bugarini - 21550317
+- Jesus Alejandro Torres Ramirez - 21550341
+- Eliú David Tovar Escobar - 21550363
+- Alejandro Soto Aguirre - 21550303
+- Rocío Vanesa Gardea Hernandez - 21550330
