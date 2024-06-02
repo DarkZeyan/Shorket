@@ -35,3 +35,4 @@ Para entrar a la pestaña de administrador, utilizar el path /admin . Los acceso
 - Jesus Alejandro Torres Ramirez - 21550341
 - Eliú David Tovar Escobar - 21550363
 - Alejandro Soto Aguirre - 21550303
+- Rocío Vanesa Gardea Hernandez - 21550330
